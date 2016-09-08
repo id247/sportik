@@ -8,10 +8,26 @@ import Root from './components/Root';
 
 const store = configureStore(); 
 
-ReactDOM.render(
-	<Root store={store} />,
-	document.getElementById('app')
-);
+const parentWin = window.parent ? window.parent : window;
+const parentDoc = parentWin.document;
+
+const app = document.getElementById('app');
+
+document.addEventListener('DOMContentLoaded', () => {
+
+	parentDoc.body.appendChild(app);
+
+	ReactDOM.render(
+		<Root store={store} />,
+		app
+	);
+
+});   
+
+
+
+
+
 
 
 

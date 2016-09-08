@@ -4,8 +4,7 @@
   "description": "",
   "cdn": "https://ad.csdnevnik.ru/special/staging/sportik/",
   "main": "gulpfile.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.0",
@@ -18,6 +17,7 @@
     "bson": "^0.5.4",
     "crypto-js": "^3.1.6",
     "del": "latest",
+    "gsap": "^1.19.0",
     "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
     "gulp-autoprefixer": "latest",
     "gulp-babel": "latest",

@@ -139,24 +139,6 @@ gulp.task('html', function(callback){
 			basepath: '@file',
 			context: {
 				server: server,
-				role: false,
-				forum: false,
-				manualLink: 'https://ad.csdnevnik.ru/special/staging/dove/download/dove-self-esteem.pdf',
-				downloadClick: 'ga(\'send\', \'event\', \'Мануал\', \'Скачивание\');', 
-				missionClick: 'ga(\'send\', \'event\', \'Миссия Dove\', \'Переход\');', 
-				videoClick: 'ga(\'send\', \'event\', \'Видео One thing\', \'Просмотр\');', 
-				videoMomsClick: 'ga(\'send\', \'event\', \'Видео Влияние\', \'Просмотр\');', 
-				momQuizClick: 'ga(\'send\', \'event\', \'Тест\', \'Прохождение\');', 
-				selfConfidenceClick: 'ga(\'send\', \'event\', \'Статья (Как повысить)\', \'Переход\');', 
-				daughterConfidenceClick: 'ga(\'send\', \'event\', \'Статья (Как помочь)\', \'Переход\');', 
-				behaviorClick: 'ga(\'send\', \'event\', \'Статья (Как поведение)\', \'Переход\');', 
-				forumMomsClick: 'ga(\'send\', \'event\', \'Форум (Мамы)\', \'Переход\');', 
-				forumGirlsClick: 'ga(\'send\', \'event\', \'Форум (Дочки)\', \'Переход\');', 
-				girlsQuizClick: 'ga(\'send\', \'event\', \'Опрос\', \'Прохождение\');', 
-				standartsClick: 'ga(\'send\', \'event\', \'Статья (Как менялись)\', \'Переход\');', 
-				celebritiesClick: 'ga(\'send\', \'event\', \'Статья (Чего стеснялись)\', \'Переход\');', 
-				habbitsClick: 'ga(\'send\', \'event\', \'Статья (Какие привычки)\', \'Переход\');', 
-				competitionClick: 'ga(\'send\', \'event\', \'Конкурс\', \'Переход\');', 
 			},
 			indent: true
 		}))
@@ -224,11 +206,11 @@ gulp.task('vers', function(){
 			return node;
 		}
 
-		node.attrs[attrName]=  attr.replace('assets/', CDN) + '?_v=' + version;
+		node.attrs[attrName]=  attr.replace('assets/', CDN); // + '?_v=' + version;
 		return node;
 	}
 
-	return gulp.src([destFolder + '/{dnevnik,staging}/*.html'])
+	return gulp.src([destFolder + '/**/*.html'])
 		.pipe($.posthtml(plugins))
 		.on('error', $.notify.onError())
 		.pipe(gulp.dest(destFolder));

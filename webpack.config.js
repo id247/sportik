@@ -164,12 +164,12 @@ const config = {
 		module: {
 			loaders: [
 				loaders.babel,
-				loaders.strip,				
+				//loaders.strip,				
 			]
 		},
 		plugins: [  
 			plugins.env,
-			plugins.uglifyJs,
+			//plugins.uglifyJs,
 		]
 	}
 };

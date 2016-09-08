@@ -1,25 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as asyncActions from '../actions/async';
+import * as pageActions from '../actions/page';
+
+
+import Main from '../components/pages/Main';
 
 class App extends React.Component {
 
 	componentWillMount(){
 		const { props } = this;
-		props.init();
+		props.setPage('start');
 	}
 
 	render(){
 		const { props } = this;
-		return props.children;
+
+		let page;
+
+		switch(props.page){
+			default:
+				page = <Main />;
+		}
+
+		return page;
 	}
 }
 
-const mapStateToProps = null;
+const mapStateToProps = (state, ownProps) => ({
+	page: state.page,
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	init: () => dispatch(asyncActions.init()), 
+	setPage: (page) => dispatch(pageActions.setPage(page)),
 });
 
 App.propTypes = {

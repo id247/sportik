@@ -13,15 +13,6 @@ export const APIoptions = {
 export const PromoOptions = {	
 	url: 'https://ad.dnenvik.ru/promo/wishlist3',
 	server: 'https://dnevnik.ru',
-}
-
-export const ForumOptions = {	
-	pageSize: 15,
-	psyhoId: '1000005449055',
-	anonAvatar: 'https://static.dnevnik.ru/images/avatars/user/a.m.jpg',
-	postsLabel: {
-		mothers: 'forum-mothers',
-		girls: 'forum-girls',
-		competition: 'competition-mothers',
-	},
+	cdn: 'https://ad.csdnevnik.ru/special/staging/sportik/',
+	cookieDomain: 'groups.dnenvik.ru',
 }

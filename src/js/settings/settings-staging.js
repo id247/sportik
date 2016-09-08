@@ -38,15 +38,6 @@ export const APIoptions = {
 export const PromoOptions = {	
 	url: 'https://ad.dnenvik.ru/promo/hidden-forum',
 	server: 'https://dnevnik.ru',
-}
-
-export const ForumOptions = {	
-	pageSize: 15,
-	psyhoId: '1000005449055,1000005031742',
-	anonAvatar: 'https://static.dnevnik.ru/images/avatars/user/a.m.jpg',
-	postsLabel: {
-		mothers: 'posts-test-1',
-		girls: 'posts-test-2',
-		competition: 'posts-test-3',
-	},
+	cdn: 'https://ad.csdnevnik.ru/special/staging/sportik/',
+	cookieDomain: '.dnenvik.ru',
 }
