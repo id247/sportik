@@ -1,120 +1,54 @@
-import API from '../api/api';
-import OAuth from '../api/hello';
-
-import { ForumOptions } from 'appSettings';
-
-import * as visual from '../helpers/visual.js';
+import Cookie from 'js-cookie';
+import { PromoOptions } from 'appSettings';
 
 import * as loadingActions 		from '../actions/loading';
 import * as errorActions 		from '../actions/error';
 import * as userActions 		from '../actions/user';
 import * as pageActions 		from '../actions/page';
+import * as cookiesActions 		from '../actions/cookies';
 
 
-//error handler
 
-export function catchError(err){
+
+//cookies
+export function getCookies() {
 	return dispatch => {
-		
-		let errorStart = 'Ошибка ' + err.message + ':';
-		let errorEnd = 'Попробуйте обновить страницу.';
+		const cookies = Cookie.get(PromoOptions.cookieName);
 
-		if (!err.description) {
-			console.error(errorStart + ' ' + err);			
-			dispatch(errorActions.setError(errorStart + err + errorEnd));
+		if (!cookies){
 			return;
 		}
 
-		let description = err.description;
-
-		if (err.description.type && err.description.description){
-
-			description = err.description.type + ' (' + err.description.description + ')'; 
-
+		try{
+			const data = JSON.parse(cookies);
+		}catch(e){
+			console.error(e);
+			return;
 		}
-
-		console.error(errorStart + ' ' + description);
-
-		switch (err.message){
-			case 401:					
-				dispatch(logout());
-				return;
-				
-				break;
-			case 403: 
-				errorEnd = 'Отказано в доступе.'
-				
-				break;
-			case 404: 
-				errorEnd = 'Запрошеный ресурс не найден.'
-				
-				break;
-		}
-
-		dispatch(errorActions.setError(errorStart + ' ' + description + ' ' + errorEnd));
-	
-	}
-}
-
-// authorisation
-
-export function login() {
-	return dispatch => {
-		dispatch(loadingActions.loadingShow());
 		
-		return OAuth.login()
-		.then( () => {
-			dispatch(loadingActions.loadingHide());	
 
-			dispatch(pageActions.setPageWithoutHistory('/'));
-		},(err) => {
-			dispatch(loadingActions.loadingHide());	
-
-			//dispatch(catchError(err));
-		});
+		dispatch(cookiesAction.cookiesSet(data));
 	}
 }
+export function setCookies() {
+	return (dispatch, getState) => {
+		const data = JSON.stringify(getState().cookies);
 
+		//new Date(new Date().getTime() + .5 * 60 * 1000)
 
-export function logout() {
-	return dispatch => {
-		OAuth.logout();
-		dispatch(userActions.userUnset());
-		dispatch(pageActions.setPageWithoutHistory('/login'));
+		Cookie.set(PromoOptions.cookieName, data, { 
+			domain: PromoOptions.cookieDomain, 
+			path: '/'
+		});		
 	}
 }
 
 
 //init
 
-export function getInitialData() {
-
-	return dispatch => {
-		dispatch(loadingActions.loadingShow());	
-
-		return API.getUser()
-		.then( (user) => {	
-			dispatch(loadingActions.loadingHide());
-
-			dispatch(userActions.userSet(user));
-			dispatch(pageActions.setPageWithoutHistory('/'));
-		})
-		.catch( err => { 
-			dispatch(loadingActions.loadingHide());
-
-			dispatch(pageActions.setPageWithoutHistory('/login'));
-			dispatch(catchError(err)); 
-		})
-		.then( () => {			
-			
-		})
-	}
-}
-
-
 export function init() {
 	return dispatch => {
-		return dispatch(getInitialData());	
+		return dispatch(getCookies());	
 	}
 }
 

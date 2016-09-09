@@ -261,7 +261,7 @@ gulp.task('server', function () {
 		port: 9000
 	}));
 	
-	gulp.watch('src/sass/**/*.scss', gulp.series('sass'));
+	//gulp.watch('src/sass/**/*.scss', gulp.series('sass'));
 	gulp.watch('src/assets/**/*', gulp.series('assets'));
 	//gulp.watch(['src/base-js/**/*.js'], gulp.series('webpack'));
 	gulp.watch('src/html/**/*.html', gulp.series('html'));
@@ -273,7 +273,7 @@ gulp.task('clean', function() {
 	return del([destFolder]);
 });
 
-gulp.task('build', gulp.series('assets', 'sass', 'html'));
+gulp.task('build', gulp.series('assets', 'html'));
 
 
 //PUBLIC TASKS
@@ -281,13 +281,13 @@ gulp.task('build', gulp.series('assets', 'sass', 'html'));
 //production
 
 // npm run prod - build whole project to deploy in 'production' folder
-gulp.task('prod-no-js', gulp.series('assets', 'sass', 'html', 'modifyCssUrls', 'vers'));
+gulp.task('prod-no-js', gulp.series('assets', 'sprite', 'html', 'modifyCssUrls', 'vers'));
 
 // npm run prod-html - build only html in 'production' folder
 gulp.task('prod-html', gulp.series('html', 'vers'));
 
 // npm run prod-css - build only css in 'production' folder
-gulp.task('prod-css', gulp.series('sass', 'modifyCssUrls'));
+gulp.task('prod-css', gulp.series('sprite', 'modifyCssUrls'));
 
 //development
 

@@ -1,50 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Cookie from 'js-cookie';
-import { PromoOptions } from 'appSettings';
+
 
 import { TweenMax, TimelineMax } from 'gsap';
 
 
-var sportik = {
-	position: 'fixed',
-	right: '-500px',
-	bottom: '50px',
-	zIndex: 5000000,
-};
-var sportik__image = {
-	display: 'block',
-	width: '250px',
-	height: '337px',
-	background: 'url(' + PromoOptions.cdn + 'images/pers.png) no-repeat',
-};
-var sportik__close = {
-	position: 'absolute',
-	top: '0px',
-	right: '0px',
-	fontSize: '40px',
-	cursor: 'pointer',
-};
-var sportik__text = {
-	position: 'absolute',
-	bottom: '100%',
-	right: '50%',
-	fontSize: '20px',
-	background: '#fff',
-	padding: '10px',
-	borderRadius: '30px',
-	textAlign: 'center',
-	maxWidth: '200px',
-	minWidth: '150px',
-	boxShadow: '0 0 15px rgba(0,0,0,.5)',
-};
+
 
 class Main extends React.Component {
 
 	componentDidMount(){
-		console.log(localStorage.getItem('hiddenTil'));
-		if (!localStorage.getItem('hiddenTil')){
+		console.log(Cookie.get('hidden'));
+		if (!Cookie.get('hidden')){
 			this._show();
 		}
 	}
@@ -78,25 +46,69 @@ class Main extends React.Component {
 
 	_closeHandler = () => (e) => {
 		e.preventDefault();
-		localStorage.setItem('hiddenTil', 'yes');
 
-		console.log(localStorage.getItem('hiddenTil'));
+
+		Cookie.set('hidden', 'yes', { 
+			expires: new Date(new Date().getTime() + .5 * 60 * 1000), 
+			domain: PromoOptions.cookieDomain, 
+			path: '/'
+		});
+
+		console.log(Cookie.get('hidden'));
 		this._hide();
 	}
 
 	render(){
 		const { props } = this;
-		console.log(9);
+		console.log(23);
+
+
+		const styles = {
+			sportik: {
+				position: 'fixed',
+				right: '-500px',
+				bottom: '50px',
+				zIndex: 5000000,
+			},
+			image: {
+				display: 'block',
+				width: '250px',
+				height: '337px',
+				background: 'url(' + PromoOptions.cdn + 'images/1.png) no-repeat',
+			},
+			close: {
+				position: 'absolute',
+				top: '0px',
+				right: '0px',
+				fontSize: '40px',
+				cursor: 'pointer',
+			},
+			text: {
+				position: 'absolute',
+				bottom: '100%',
+				right: '50%',
+				fontSize: '20px',
+				background: '#fff',
+				padding: '10px',
+				borderRadius: '30px',
+				textAlign: 'center',
+				maxWidth: '200px',
+				minWidth: '150px',
+				boxShadow: '0 0 15px rgba(0,0,0,.5)',
+			},
+		};
+
+
 		return(
 
-			<div ref="sportik" style={sportik}>
+			<div ref="sportik" style={styles.sportik}>
 
-				<span style={sportik__image}></span>
+				<span style={styles.image}></span>
 
-				<span ref="sportik__text" style={sportik__text}>Привет! Я тебя достану!</span>
+				<span ref="sportik__text" style={styles.text}>Привет! Я тебя достану!</span>
 
 				<span 
-					style={sportik__close}
+					style={styles.close}
 					onClick={this._closeHandler()}
 				>
 					&times;

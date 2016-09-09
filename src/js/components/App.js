@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 
 import * as pageActions from '../actions/page';
 
+import Cookie from 'js-cookie';
 
-import Main from '../components/pages/Main';
+import Main from '../components/pages/main/Main';
 
 class App extends React.Component {
 
 	componentWillMount(){
 		const { props } = this;
 		props.setPage('start');
+
+		Cookie.get()
 	}
 
 	render(){
@@ -19,6 +22,9 @@ class App extends React.Component {
 		let page;
 
 		switch(props.page){
+			case 'pers':
+				page = <Pers />;
+				break
 			default:
 				page = <Main />;
 		}

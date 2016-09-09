@@ -15,4 +15,5 @@ export const PromoOptions = {
 	server: 'https://feature01.dnevnik.ru',
 	cdn: 'http://localhost:9000/assets/',
 	cookieDomain: 'localhost',
+	cookieName: 'sportikLocal',
 }

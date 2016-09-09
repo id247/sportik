@@ -1,0 +1,34 @@
+@import '~sprite.scss';
+.box{
+	position: fixed;
+	right: -500px;
+	bottom: 50px;
+	zIndex: 5000000;
+}
+.image{
+	display: block;
+	width: 250px;
+	height: 337px;
+	//background: url(http://localhost:9000/assets/images/pers/1.png) 50% 0 no-repeat;
+	@include sprite($logotype);
+}
+.close{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	fontSize: 40px;
+	cursor: pointer;
+}
+.text{
+	position: absolute;
+	bottom: 100%;
+	right: 50%;
+	fontSize: 20px;
+	background: #fff;
+	padding: 10px;
+	borderRadius: 30px;
+	textAlign: center;
+	maxWidth: 200px;
+	minWidth: 150px;
+	boxShadow: 0 0 15px rgba(0,0,0,.5);
+}

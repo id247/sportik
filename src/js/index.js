@@ -12,10 +12,16 @@ const parentWin = window.parent ? window.parent : window;
 const parentDoc = parentWin.document;
 
 const app = document.getElementById('app');
+const styles = document.getElementById('sportik-styles');
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	parentDoc.body.appendChild(app);
+	if (app){
+		parentDoc.body.appendChild(app);
+	}
+	if (styles){
+		parentDoc.head.appendChild(styles);
+	}
 
 	ReactDOM.render(
 		<Root store={store} />,
