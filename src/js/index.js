@@ -12,7 +12,11 @@ const parentWin = window.parent ? window.parent : window;
 const parentDoc = parentWin.document;
 
 const app = document.getElementById('app');
-const styles = document.getElementById('sportik-styles');
+const styles = document.getElementById('sportik-styles') || document.querySelector('head style');
+
+console.log(parentDoc.location);
+
+console.log(25);
 
 document.addEventListener('DOMContentLoaded', () => {
 

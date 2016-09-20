@@ -47,7 +47,16 @@ gulp.task('modifyCssUrls', function () {
 	return gulp.src(destFolder + '/assets/css/style.css')
 		.pipe($.modifyCssUrls({
 			modify: function (url, filePath) {
-				const buffer = fs.readFileSync(url.replace('../', destFolder + '/assets/'));				
+
+				let filePathTemp = url.replace('../', destFolder + '/assets/');
+
+				if (url.indexOf('localhost') > -1){
+					filePathTemp = url.replace('http://localhost:9000/assets/', destFolder + '/assets/');
+
+					url = url.replace('http://localhost:9000/assets/', CDN);
+				}
+
+				const buffer = fs.readFileSync(filePathTemp);				
 				return url + '?_v=' + revHash(buffer);
 			},
 		}))		

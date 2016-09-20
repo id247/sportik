@@ -47,7 +47,6 @@ class Main extends React.Component {
 
 	render(){
 		const { props } = this;
-		console.log(23);
 
 		return(
 
