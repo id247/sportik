@@ -18,6 +18,7 @@ console.log(parentDoc.location);
 
 console.log(25);
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
 	if (app){

@@ -3,26 +3,19 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 
 import { PromoOptions } from 'appSettings';
-
-import * as animation from '../../../animation';
-
 import * as cookiesActions from '../../../actions/cookies'
 
 import styles from './main.scss';
 
 import { TweenMax, TimelineMax } from 'gsap';
 
-
-
-class Main extends React.Component {
+class PersHidden extends React.Component {
 
 	componentDidMount(){
 
-		this._canvas = this.refs.canvas;
 		this._box = this.refs.box;
 
-
-		this._animation();
+		this._show();
 	}
 
 	_show(){
@@ -43,53 +36,13 @@ class Main extends React.Component {
 		TweenMax.to( this._box, .5, {
 			right: '-500px',
 		});
+		const timestamp = new Date(new Date().getTime() + .5 * 60 * 1000).getTime();
 
+		console.log(timestamp);
 
-		this.props.cookiesHidePers();
-
-	}
-
-	_animation(){
-		const that = this;
-
-		animation.init({canvas: this._canvas})
-		.then( boy => {
-			this.boy = boy;
-		})
-		.catch( err => {
-			console.error(err);
-		});
-
-		this._show();
-	}
-
-	_canvasClickHandler = () => (e) => {
-		e.preventDefault();
-
-		console.log(this.boy);
-
-		animation.gotoAndPlay(this.boy, 'say_words2')
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'drink');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'show_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'hide_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		});
+		this.props.cookiesSetHiddenUntil(timestamp);
 
 	}
-
 
 	_closeHandler = () => (e) => {
 		e.preventDefault();
@@ -103,14 +56,7 @@ class Main extends React.Component {
 
 			<div ref="box" styleName="box">
 
-				<canvas 
-					ref="canvas" 
-					width="200" 
-					height="165" 
-					className="box__canvas"
-					onClick={this._canvasClickHandler()}
-				>
-				</canvas>
+				Эээ... че перса спрятал?
 
 				<span 
 					styleName="close"
@@ -132,10 +78,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	//logout: () => dispatch(asyncActions.logout()), 
-	cookiesHidePers: () => dispatch(cookiesActions.cookiesHidePers()), 
+	cookiesSetHiddenUntil: (timestamp) => dispatch(cookiesActions.cookiesSetHiddenUntil(timestamp)), 
 });
 
-Main.propTypes = {
+PersHidden.propTypes = {
 	mixClass: React.PropTypes.string,
 //	Array: React.PropTypes.array.isRequired,
 //	Bool: React.PropTypes.bool.isRequired,
@@ -146,4 +92,4 @@ Main.propTypes = {
 //	Symbol: React.PropTypes.symbol.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(Main, styles));
+export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(PersHidden, styles));
