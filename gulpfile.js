@@ -162,6 +162,8 @@ gulp.task('html', function(callback){
 //set new images,css and js hash versions
 gulp.task('vers', function(){	
 
+	console.log('vers', destFolder);
+
 	const plugins = [
 		function relativeLinks(tree) {
 			tree.match({ tag: 'a' }, function (node) {
@@ -215,7 +217,7 @@ gulp.task('vers', function(){
 			return node;
 		}
 
-		node.attrs[attrName]=  attr.replace('assets/', CDN); // + '?_v=' + version;
+		node.attrs[attrName]=  attr.replace('assets/', CDN) + '?_v=' + version;
 		return node;
 	}
 

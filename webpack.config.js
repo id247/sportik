@@ -216,14 +216,14 @@ const config = {
 				loaders.extractCssModules,
 				loaders.spritesmith,
 				loaders.babel,
-				//loaders.strip,				
+				loaders.strip,				
 			]
 		},
 		plugins: [  
 			plugins.env,
 			plugins.ExtractTextPlugin,
 			plugins.SpritesmithPlugin,
-			//plugins.uglifyJs,
+			plugins.uglifyJs,
 		]
 	}
 };

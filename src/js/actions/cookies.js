@@ -26,6 +26,14 @@ export function cookiesSetHiddenUntil(timestamp) {
 	}
 };
 
+export const COOKIES_APPEARANCE_COUNT_UPDATE = 'COOKIES_APPEARANCE_COUNT_UPDATE';
+
+export function cookiesAppearanceCountUpdate() {
+	return {
+		type: COOKIES_APPEARANCE_COUNT_UPDATE,
+	}
+};
+
 export function cookiesRead(){
 	return dispatch => {
 		const { props } = this;
@@ -34,16 +42,33 @@ export function cookiesRead(){
 		console.log(cookie);
 
 		if (!cookie){
+			dispatch(cookiesSet({}));
 			return false;
 		}
-		
+
 		try	{
-			dispatch(cookiesSet(JSON.parse(cookie)));
+
+			const cokieObj = JSON.parse(cookie)
+			
+			//if last appearanse was yesterday - reset appearance counter to show pers again
+			const today = new Date().getMonth() * 100 + new Date().getDate();
+
+			if (today > cookie.appearanceDate){
+				console.log('yesterday');
+				cokieObj.appearanceCount = 0;
+			}
+
+			cokieObj.appearanceCount = 0;
+
+			dispatch(cookiesSet(cokieObj));
+
 		}catch(e){
 			console.log(e);
+			dispatch(cookiesSet({}));
 		}	
 	}
 }
+
 export function cookiesWrite(){
 	return (dispatch, getState) => {
 		const cookies = getState().cookies;
@@ -65,6 +90,15 @@ export function cookiesHidePers(){
 		console.log(timestamp);
 
 		dispatch(cookiesSetHiddenUntil(timestamp));
+		dispatch(cookiesWrite());
+
+	}
+}
+
+export function appearanceCountUpdate(){
+	return (dispatch, getState) => {
+
+		dispatch(cookiesAppearanceCountUpdate());
 		dispatch(cookiesWrite());
 
 	}

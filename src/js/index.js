@@ -22,7 +22,8 @@ console.log(25);
 document.addEventListener('DOMContentLoaded', () => {
 
 	if (app){
-		parentDoc.body.appendChild(app);
+		//parentDoc.body.appendChild(app);
+		parentDoc.body.insertBefore(app, parentDoc.body.firstChild);
 	}
 	if (styles){
 		parentDoc.head.appendChild(styles);

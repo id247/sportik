@@ -11,22 +11,55 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
+$bubble-name: 'bubble';
+$bubble-x: 178px;
+$bubble-y: 52px;
+$bubble-offset-x: -178px;
+$bubble-offset-y: -52px;
+$bubble-width: 34px;
+$bubble-height: 51px;
+$bubble-total-width: 326px;
+$bubble-total-height: 150px;
+$bubble-image: 'http://localhost:9000/assets/images/sprite.png';
+$bubble: (178px, 52px, -178px, -52px, 34px, 51px, 326px, 150px, 'http://localhost:9000/assets/images/sprite.png', 'bubble', );
+$close-name: 'close';
+$close-x: 212px;
+$close-y: 52px;
+$close-offset-x: -212px;
+$close-offset-y: -52px;
+$close-width: 27px;
+$close-height: 27px;
+$close-total-width: 326px;
+$close-total-height: 150px;
+$close-image: 'http://localhost:9000/assets/images/sprite.png';
+$close: (212px, 52px, -212px, -52px, 27px, 27px, 326px, 150px, 'http://localhost:9000/assets/images/sprite.png', 'close', );
+$friend-name: 'friend';
+$friend-x: 0px;
+$friend-y: 0px;
+$friend-offset-x: 0px;
+$friend-offset-y: 0px;
+$friend-width: 178px;
+$friend-height: 150px;
+$friend-total-width: 326px;
+$friend-total-height: 150px;
+$friend-image: 'http://localhost:9000/assets/images/sprite.png';
+$friend: (0px, 0px, 0px, 0px, 178px, 150px, 326px, 150px, 'http://localhost:9000/assets/images/sprite.png', 'friend', );
 $logotype-name: 'logotype';
-$logotype-x: 0px;
+$logotype-x: 178px;
 $logotype-y: 0px;
-$logotype-offset-x: 0px;
+$logotype-offset-x: -178px;
 $logotype-offset-y: 0px;
 $logotype-width: 148px;
 $logotype-height: 52px;
-$logotype-total-width: 148px;
-$logotype-total-height: 52px;
+$logotype-total-width: 326px;
+$logotype-total-height: 150px;
 $logotype-image: 'http://localhost:9000/assets/images/sprite.png';
-$logotype: (0px, 0px, 0px, 0px, 148px, 52px, 148px, 52px, 'http://localhost:9000/assets/images/sprite.png', 'logotype', );
-$spritesheet-width: 148px;
-$spritesheet-height: 52px;
+$logotype: (178px, 0px, -178px, 0px, 148px, 52px, 326px, 150px, 'http://localhost:9000/assets/images/sprite.png', 'logotype', );
+$spritesheet-width: 326px;
+$spritesheet-height: 150px;
 $spritesheet-image: 'http://localhost:9000/assets/images/sprite.png';
-$spritesheet-sprites: ($logotype, );
-$spritesheet: (148px, 52px, 'http://localhost:9000/assets/images/sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($bubble, $close, $friend, $logotype, );
+$spritesheet: (326px, 150px, 'http://localhost:9000/assets/images/sprite.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables

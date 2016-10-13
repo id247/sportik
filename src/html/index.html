@@ -6,10 +6,14 @@
 </head>
 <body>
 
-<img src="assets/images/bg/main.jpg" alt="" style="display: block; margin: auto;">
+<img src="assets/images/bg/main.jpg" alt="" style="display: block; margin: auto; position: relative;">
 
+@@if (server === "local"){
 <iframe src="sportik.html"></iframe>
-	
+}
+@@if (server !== "local"){
+<iframe src="https://ad.csdnevnik.ru/special/staging/sportik/sportik.html"></iframe>
+}
 </body>
 </html>
 

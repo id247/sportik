@@ -22,6 +22,14 @@ export function gotoAndPlay(element, frameid){
 	});
 }
 
+export function wait(ms){
+	return new Promise( (resolve, reject) => {	
+		setTimeout( () => {
+			resolve();
+		}, ms);			
+	});
+}
+
 export function init(o) {
 	canvas = o.canvas;
 	images = images||{};

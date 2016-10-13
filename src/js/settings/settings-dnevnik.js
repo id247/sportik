@@ -14,6 +14,7 @@ export const PromoOptions = {
 	url: 'https://ad.dnenvik.ru/promo/wishlist3',
 	server: 'https://dnevnik.ru',
 	cdn: 'https://ad.csdnevnik.ru/special/staging/sportik/',
-	cookieDomain: '.dnevnik.ru',
+	//cookieDomain: '.dnevnik.ru',
+	cookieDomain: '.csdnevnik.ru',
 	cookieName: 'sportikDnevnik',
 }
