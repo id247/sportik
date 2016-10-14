@@ -48,11 +48,12 @@ class App extends React.Component {
 				page = <Pers />;
 				break;
 			case 'main':
+			case 'pers-hidden':
 				page = <Main />;
 				break;
-			case 'pers-hidden':
-				page = <PersHidden />;
-				break;
+			//case 'pers-hidden':
+				//page = <PersHidden />;
+				//break;
 			default:
 				page = null;
 		}

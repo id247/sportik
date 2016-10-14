@@ -1,6 +1,6 @@
-var canvas, stage, exportRoot;
+var canvas, stage, exportRoot, pers;
 
-export function gotoAndPlay(element, frameid){
+export function gotoAndPlay(element, frameid, pauseAfter){
 
 	return new Promise( (resolve, reject) => {	
 		element.gotoAndPlay(frameid);
@@ -9,7 +9,11 @@ export function gotoAndPlay(element, frameid){
 			//console.log(element);
 
 			if (element.paused){
-				resolve();
+
+				setTimeout( () => {
+					resolve();
+				}, pauseAfter);	
+
 				return;
 			}
 
@@ -21,17 +25,38 @@ export function gotoAndPlay(element, frameid){
 		isDone();
 	});
 }
+export function gotoAndStop(element, frameid, pauseAfter){
 
-export function wait(ms){
 	return new Promise( (resolve, reject) => {	
-		setTimeout( () => {
-			resolve();
-		}, ms);			
+		element.gotoAndStop(frameid);
+		
+		function isDone(){
+			//console.log(element);
+
+			if (element.paused){
+
+				setTimeout( () => {
+					resolve();
+				}, pauseAfter);	
+
+			}
+
+			setTimeout( () => {
+				isDone();
+			}, 100);			
+		}
+
+		isDone();
 	});
+}
+
+export function stop(element){
+	element.stop();
 }
 
 export function init(o) {
 	canvas = o.canvas;
+	pers = o.pers;
 	images = images||{};
 	var loader = new createjs.LoadQueue(false);
 	loader.addEventListener("fileload", handleFileLoad);
@@ -81,7 +106,7 @@ function handleComplete(evt) {
 	for(let i=0; i<ssMetadata.length; i++) {
 		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
 	}
-	exportRoot = new lib.boy1_anim();
+	exportRoot = new lib[pers]();
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);	
 	//Registers the "tick" event listener.

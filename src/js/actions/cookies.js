@@ -85,11 +85,21 @@ export function cookiesWrite(){
 export function cookiesHidePers(){
 	return (dispatch, getState) => {
 
-		const timestamp = new Date(new Date().getTime() + .5 * 60 * 1000).getTime();
+		const timestamp = new Date(new Date().getTime() + 5 * 60 * 1000).getTime();
 
 		console.log(timestamp);
 
 		dispatch(cookiesSetHiddenUntil(timestamp));
+		dispatch(cookiesWrite());
+
+	}
+}
+
+
+export function cookiesShowPers(){
+	return (dispatch, getState) => {
+
+		dispatch(cookiesSetHiddenUntil(0));
 		dispatch(cookiesWrite());
 
 	}

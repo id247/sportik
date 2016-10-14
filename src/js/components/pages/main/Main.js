@@ -15,13 +15,24 @@ import { TweenMax, TimelineMax } from 'gsap';
 const initialPosotions = {
 	box: {			
 		marginTop: '0px',
-		marginLeft: '1000px',
+		opacity: 0,
 		transform: 'scale(0)',
 	},
 	friend: {	
 		opacity: 0,
 		transform: 'scale(0)',
+	},
+	bubble: {
+		opacity: 0,
 	}
+}
+
+const initialState = {
+	text: false,
+	buttons: [],
+	boxVisible: true,
+	friendVisible: false,
+	closeVisible: false,
 }
 
 class Main extends React.Component {
@@ -29,77 +40,131 @@ class Main extends React.Component {
 	constructor(props){
 		super(props);
 
-		this.state = {
-			text: false,
-			buttons: [],
-			boxVisible: true,
-			friendVisible: false,
-		}
+		this.state = initialState;
+
+		this.activeAnimation = false;
+		this.timelines = [];
 	}
 
 	componentDidMount(){
 
-		this._canvas = this.refs.canvas;
-		this._box = this.refs.box;
-		this._friend = this.refs.friend;
+		this._setBoxInitialState();
+		this._setFriendInitialState();
+
 		this._animationInit();
 
-		TweenMax.to(this._box, 0, initialPosotions.box);
-
-		TweenMax.to(this._friend, 0, initialPosotions.friend);
+		this.timeline = new TimelineMax({});
 
 	}
 
+	_setBoxInitialState(){
+		const { box } = this.refs;
+
+		TweenMax.set(box, initialPosotions.box);
+
+		this._setBubbleInitialState();
+	}
+
+	_setFriendInitialState(){
+		const { friend } = this.refs;
+
+		TweenMax.set(friend, initialPosotions.friend);
+	}
+
+	_setBubbleInitialState(){
+		const { bubble, bubbleText, bubbleButtons } = this.refs;
+		return;
+		TweenMax.set(bubble, initialPosotions.bubble);
+		TweenMax.set(bubbleText, initialPosotions.bubble);
+		TweenMax.set(bubbleButtons, initialPosotions.bubble);
+	}
+
+	_firstShow(){
+
+		const { props } = this;
+	
+		if (props.cookies.hiddenUntil < new Date().getTime() ){
+			this._show();
+		}else{
+			this._hide();
+		}
+		
+	}
+
+
 	_show(){
-		// TweenMax.to( this._box, 1, {
-		// 	marginLeft: '470px',
-		// 	transform: 'scale(1)',
-		// 	onComplete: this._selectAppearance.bind(this),
-		// });
 
+		const { box, friend } = this.refs;
 
-		const tl = new TimelineMax({
-			//onComplete: first.bind(this)
+		this.setState({
+			...this.state,
+			...initialState
 		});
 
-		tl.to( this._friend, 0, initialPosotions.friend)
-		.to( this._box, 0, initialPosotions.box)
-		.to( this._box, .5, {
-			marginLeft: '470px',
+		this._setBoxInitialState();
+
+		const timeline = new TimelineMax({});
+		this.timelines.push(timeline);
+
+
+		timeline.to( friend, .5, {
+			...initialPosotions.friend,
+			...{
+				onStart: () => {
+					this._hideCloseButton();
+				},
+			}
+		})
+		.to( box, .5, {
+			opacity: 1,
 			transform: 'scale(1)',
-			onComplete: this._selectAppearance.bind(this),
+			onComplete: () => {
+				this._showCloseButton();
+				this._selectAppearance();
+			},
 		})
 		;
 	}
 
 	_hide(){
 
-		const tl = new TimelineMax({
-			//onComplete: first.bind(this)
-		});
+		const { box, friend } = this.refs;
 
-		tl.to( this._box, .5, {
+		const timeline = new TimelineMax({});
+		this.timelines.push(timeline);
+		
+		timeline.to( box, .5, {
 			marginTop: '-200px',
 			transform: 'scale(0)',
+			onStart: () => {
+				this._hideCloseButton();
+			}
 		})
-		.to( this._friend, 0, initialPosotions.friend)
-		.to( this._friend, .5, {
+		.to( friend, 0, initialPosotions.friend)
+		.to( friend, .5, {
 			opacity: 1,
 			transform: 'scale(1)',
+			onComplete: () => {
+				this._showCloseButton();
+				this._selectAppearance();
+			},
 		})
 		;
-
-		this.props.cookiesHidePers();
 
 	}
 
 	_animationInit(){
 
-		animation.init({canvas: this._canvas})
-		.then( boy => {
-			this.boy = boy;
+		const { canvas } = this.refs;
 
-			this._show();
+		animation.init({
+			canvas: canvas, 
+			pers: 'boy1_anim'
+		})
+		.then( pers => {
+			this.pers = pers;
+
+			this._firstShow();
 		})
 		.catch( err => {
 			console.error(err);
@@ -130,21 +195,100 @@ class Main extends React.Component {
 					console.log('enought for today');
 		}
 
-		this.props.appearanceCountUpdate();
+		//this.props.appearanceCountUpdate();
+	}
+
+	_showText(){
+
+		const { bubble, bubbleText, bubbleButtons } = this.refs;
+
+		const timeline = new TimelineMax({
+		});
+
+		this.timelines.push(timeline);
+
+		timeline.fromTo( bubble, .3, {
+			opacity: '0',
+		},{			
+			opacity: '1',
+		})
+		.fromTo( bubbleText, .4, {
+			opacity: '0',
+		},{			
+			opacity: '1',
+		})
+		.fromTo( bubbleButtons, .7, {
+			opacity: '0',
+		},{			
+			opacity: '1',			
+		})
+		;
+
+	}
+
+	_clearBubble(){
+		this.setState({
+			...this.state,
+			...{
+				text: false,
+				buttons: [],
+			}
+		});
+	}
+
+
+	_showCloseButton(){
+		this.setState({
+			...this.state,
+			...{
+				closeVisible: true,
+			}
+		});		
+	} 
+
+	_hideCloseButton(){
+		this.setState({
+			...this.state,
+			...{
+				closeVisible: false,
+			}
+		});		
+	} 
+
+
+	//gentrate uniq timestamp id rof animateion
+	_createAnimationId(){
+		const animationId = new Date().getTime();
+		this.activeAnimation = animationId;
+		return animationId;
+	}
+
+	_animationExists(animationId){
+		return this.activeAnimation === animationId;
+	}
+
+	//uniq id from _createAnimationId(), frame label, pauseAfter in ms
+	_animationPlay(animationId, label, pauseAfter = 0){
+		if (this._animationExists(animationId)){
+			return animation.gotoAndPlay(this.pers, label, pauseAfter);
+		}
+
+		throw new Error('stopped');
+	}
+
+	_animationCatch(err){
+		if (err.message === 'stopped'){
+			return;
+		}
+		console.error(err);
 	}
 
 	_sayHi(){
-		console.log('hi');
 
-		//console.log(this.refs);
+		const animationId = this._createAnimationId();
 
-		//return;
-
-		const { bubble, bubbleInner, bubbleText, bubbleButtons } = this.refs;
-
-
-			animation.gotoAndPlay(this.boy, 'say_hello')
-			.then( () => {
+		this._animationPlay(animationId, 'say_hello')
+		.then( () => {
 
 			this.setState({
 				...this.state,
@@ -168,52 +312,27 @@ class Main extends React.Component {
 					buttons: [
 						{
 							text: 'Я готов!',
-							handler: this._goNormalDrinkHandler,
+							handler: this._okClickHandler,
 						}
 					],
 				}
 			});
 
-			const tl = new TimelineMax({
-				//onComplete: first.bind(this)
-			})
-
-			tl.fromTo( bubble, .3, {
-				opacity: '0',
-			},{			
-				opacity: '1',
-				//onComplete: this._selectAppearance.bind(this),
-			})
-			.fromTo( bubbleText, .4, {
-				opacity: '0',
-			},{			
-				opacity: '1',
-				//onComplete: this._selectAppearance.bind(this),
-			})
-			.fromTo( bubbleButtons, .7, {
-				opacity: '0',
-			},{			
-				opacity: '1',			
-			})
-			;
-
-			return animation.gotoAndPlay(this.boy, 'say_words2');
+			return this._animationPlay(animationId, 'say_words2');
 		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
+		.then( () => this._animationPlay(animationId, 'say_words2') )
+		.then( () => this._animationPlay(animationId, 'hand_up') )
+		.then( () => this._animationPlay(animationId, 'normal') )
+		.catch( this._animationCatch )
 		;
+
 	}
 
 	_homework(){
 
-		animation.gotoAndPlay(this.boy, 'say_hello')
+		const animationId = this._createAnimationId();
+
+		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
 
 			this.setState({
@@ -232,31 +351,27 @@ class Main extends React.Component {
 					buttons: [
 						{
 							text: 'Хорошо!',
-							handler: this._goNormalShowHandler,
+							handler: this._okClickHandler,
 						}
 					],
 				}
 			});
 
-			return animation.gotoAndPlay(this.boy, 'say_words2');
+			return this._animationPlay(animationId, 'say_words2');
 		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'mouth_close');
-		})
+		.then( () => this._animationPlay(animationId, 'say_words2') )
+		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.catch( this._animationCatch )
 		;
 
 	}
 
 	_fact(){
 
-
+		const animationId = this._createAnimationId();
 		
-		animation.gotoAndPlay(this.boy, 'say_hello')
+		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
-
 
 			this.setState({
 				...this.state,
@@ -274,28 +389,27 @@ class Main extends React.Component {
 					buttons: [
 						{
 							text: 'Хочу узнать!',
-							handler: this._goLinkHandler,
+							handler: this._okClickHandler,
 							href: 'http://sportik.svyatoyistochnik.com/',
 						}
 					],
 				}
 			});
 
-			return animation.gotoAndPlay(this.boy, 'say_words2');
+			return this._animationPlay(animationId, 'say_words2');
 		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'mouth_close');
-		})
+		.then( () => this._animationPlay(animationId, 'say_words2') )
+		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.catch( this._animationCatch )
 		;
 
 	}
 
 	_goodBuy(){
 
-		animation.gotoAndPlay(this.boy, 'say_hello')
+		const animationId = this._createAnimationId();
+		
+		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
 
 			this.setState({
@@ -314,145 +428,84 @@ class Main extends React.Component {
 					buttons: [
 						{
 							text: 'Пока!',
-							handler: this._goNormalDrinkHandler,
+							handler: this._okClickHandler,
 						}
 					],
 				}
 			});
 
-			return animation.gotoAndPlay(this.boy, 'say_words2');
+			return this._animationPlay(animationId, 'say_words2');
 		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'say_words2');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'mouth_close');
-		})
+		.then( () => this._animationPlay(animationId, 'say_words2') )
+		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.catch( this._animationCatch )
 		;
 
 	}
 
-	_goNormalDrink(){
+	_okClick(){
 
-		this.setState({
-			...this.state,
-			...{
-				text: false,
-				buttons: [],
-			}
-		});
+		this._clearBubble();
+		this.props.appearanceCountUpdate();
 
-		animation.gotoAndPlay(this.boy, 'drink')
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'show_bottle');
-		})
-		.then( () => {
-			return animation.wait(1000);
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'hide_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		;
+		let animationVariant = 0;
 
-	}
+		const animationId = this._createAnimationId();
 
-	_goLink(){
+		const animationVariants = [
+			() => {
+				this._animationPlay(animationId, 'hand_down')
+				.then( () => this._animationPlay(animationId, 'drink') )
+				.then( () => this._animationPlay(animationId, 'show_bottle', 1000) )
+				.then( () => this._animationPlay(animationId, 'hide_bottle') )
+				.then( () => this._animationPlay(animationId, 'hand_up') )
+				.then( () => this._animationPlay(animationId, 'normal') )
+				.catch( this._animationCatch )
+				;
+			},
+			() => {
+				this._animationPlay(animationId, 'hand_down')
+				.then( () => this._animationPlay(animationId, 'drink') )
+				.then( () => this._animationPlay(animationId, 'hand_up') )
+				.then( () => this._animationPlay(animationId, 'normal') )
+				.catch( this._animationCatch )
+				;
+			},
+			() => {
+				this._animationPlay(animationId, 'show_bottle', 1000)
+				.then( () => this._animationPlay(animationId, 'hide_bottle') )
+				.then( () => this._animationPlay(animationId, 'normal') )
+				.catch( this._animationCatch )
+				;
+			},
+		];
 
-		this.setState({
-			...this.state,
-			...{
-				text: false,
-				buttons: [],
-			}
-		});
+		if (this.props.cookies.appearanceCount > 0){
+			animationVariant = 1;
+		}
 
-		animation.gotoAndPlay(this.boy, 'normal');
-		;
-
-	}
-
-	_goNormalShow(){
-
-		this.setState({
-			...this.state,
-			...{
-				text: false,
-				buttons: [],
-			}
-		});
-
-		animation.gotoAndPlay(this.boy, 'show_bottle')
-		.then( () => {
-			return animation.wait(1000);
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'hide_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		;
-
+		animationVariants[animationVariant]();
 	}
 
 	_canvasClickHandler = () => (e) => {
 		e.preventDefault();
-
-		console.log(this.boy);
-
-		animation.gotoAndPlay(this.boy, 'say_words2')
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'drink');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'show_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'hide_bottle');
-		})
-		.then( () => {
-			return animation.gotoAndPlay(this.boy, 'normal');
-		});
-
 	}
 
 
 	_showHandler = () => (e) => {
 		e.preventDefault();
+		this.props.cookiesShowPers();
 		this._show();
 	}
 
 	_closeHandler = () => (e) => {
 		e.preventDefault();
+		this.props.cookiesHidePers();
 		this._hide();
 	}
 
-	_allGoodHandler = () => (e) => {
-		e.preventDefault();
-		this._allGood();
-	}
-
-
-	_goNormalDrinkHandler = () => (e) => {
-		e.preventDefault();
-		this._goNormalDrink();
-	}
-	_goNormalShowHandler = () => (e) => {
-		e.preventDefault();
-		this._goNormalShow();
-	}
-	_goLinkHandler = () => (e) => {
-		//e.preventDefault();
-		this._goLink();
+	_okClickHandler = () => (e) => {
+		this._okClick();
 	}
 
 	render(){
@@ -467,12 +520,12 @@ class Main extends React.Component {
 
 					<div styleName="sportik__text">
 
-						<div styleName="bubble"
+						<div styleName={ !state.text ? 'bubble' : 'bubble--visible' }
 							ref="bubble"
-							style={{display: state.text ? 'block' : 'none'}}
+							//style={{display: state.text ? 'block' : 'none'}}
 						>
 
-							<div styleName="bubble__inner" ref="bubbleInner">
+							<div styleName="bubble__inner">
 								
 								<div styleName="bubble__text" ref="bubbleText">	
 								
@@ -482,10 +535,10 @@ class Main extends React.Component {
 
 								<div styleName="bubble__buttons" 
 									ref="bubbleButtons"				
-									style={{display: state.buttons.length > 0 ? 'block' : 'none'}}
+									//style={{display:  ? 'block' : 'none'}}
 								>
 
-									{state.buttons.map( (button, i) => (
+									{ state.buttons.map( (button, i) => (
 										!button.href
 										?										
 										(
@@ -524,13 +577,14 @@ class Main extends React.Component {
 						<canvas 
 							ref="canvas" 
 							width="200" 
-							height="165" 
+							height="175" 
 							styleName="sportik__canvas"
 							//onClick={this._canvasClickHandler()}
 						>
 						</canvas>
 
-						<div styleName="sportik__close-placeholder">
+						<div styleName={!state.closeVisible ? 'sportik__close-placeholder' : 'sportik__close-placeholder--visible' }
+						>
 
 							<button 
 								styleName="button-close"
@@ -579,6 +633,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	//logout: () => dispatch(asyncActions.logout()), 
 	cookiesHidePers: () => dispatch(cookiesActions.cookiesHidePers()), 
+	cookiesShowPers: () => dispatch(cookiesActions.cookiesShowPers()), 
 	appearanceCountUpdate: () => dispatch(cookiesActions.appearanceCountUpdate()), 
 });
 

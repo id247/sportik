@@ -59,7 +59,7 @@ class PersHidden extends React.Component {
 				Эээ... че перса спрятал?
 
 				<span 
-					styleName="close"
+					styleName="button-close"
 					onClick={this._closeHandler()}
 				>
 					&times;
