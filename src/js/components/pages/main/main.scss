@@ -63,19 +63,27 @@ $blue: #0074b0;
 		left: 50%;
 		margin: 0 0 0 500px;
 	}
+
+	&__friends-list{
+		position: absolute;
+		text-decoration: none;
+		top: 30px;
+		left: 50%;
+		margin: 0 0 0 500px;		
+	}
 }
 
 .friend{
 	box-sizing: border-box;
 	@include sprite($friend);
-	padding: 55px 0 0;
+	padding: 58px 0 0;
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
 
 	&__title{
 		margin: 0 0 10px;
-		font-size: 20px;
+		font-size: 18px;
 	}
 
 	&__text{
@@ -166,6 +174,34 @@ $blue: #0074b0;
 	}
 }
 
+
+.friends-list{
+	box-sizing: border-box;
+	text-align: center;
+	width: 200px;
+	padding: 30px 15px 0 0;
+	margin: auto;
+
+	&__item--1,
+	&__item--2,
+	&__item--3,
+	&__item--4{
+		margin: 0 auto 10px;
+	}
+
+	&__item--1{
+		@include sprite($boy2);
+	}
+	&__item--2{
+		@include sprite($boy1);
+	}
+	&__item--3{
+		@include sprite($girl2);
+	}
+	&__item--4{
+		@include sprite($girl1);
+	}
+}
 
 
 .button{

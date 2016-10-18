@@ -27,8 +27,8 @@ class App extends React.Component {
 
 		console.log(new Date().getTime());
 
-		if (props.cookies.hiddenUntil < new Date().getTime()){
-			props.setPage('main');
+		if (props.cookies && props.cookies.chosenPers && props.cookies.chosenPers !== '22'){
+			props.setPage('pers');
 		}else{
 			props.setPage('pers-hidden');
 		}	
@@ -43,17 +43,15 @@ class App extends React.Component {
 
 		let page;
 
+		console.log(props.page);
+
 		switch(props.page){
 			case 'pers':
-				page = <Pers />;
-				break;
-			case 'main':
-			case 'pers-hidden':
 				page = <Main />;
 				break;
-			//case 'pers-hidden':
-				//page = <PersHidden />;
-				//break;
+			case 'pers-hidden':
+				page = <PersHidden />;
+				break;
 			default:
 				page = null;
 		}

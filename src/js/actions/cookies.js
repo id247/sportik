@@ -58,7 +58,7 @@ export function cookiesRead(){
 				cokieObj.appearanceCount = 0;
 			}
 
-			cokieObj.appearanceCount = 0;
+			//cokieObj.appearanceCount = 0;
 
 			dispatch(cookiesSet(cokieObj));
 

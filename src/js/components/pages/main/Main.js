@@ -47,9 +47,11 @@ class Main extends React.Component {
 	}
 
 	componentDidMount(){
+		const { props } = this;
 
 		this._setBoxInitialState();
 		this._setFriendInitialState();
+
 
 		this._animationInit();
 
@@ -154,20 +156,68 @@ class Main extends React.Component {
 	}
 
 	_animationInit(){
-
+		const { props } = this;
 		const { canvas } = this.refs;
 
-		animation.init({
-			canvas: canvas, 
-			pers: 'boy1_anim'
-		})
-		.then( pers => {
-			this.pers = pers;
+		const that = this;
 
-			this._firstShow();
-		})
-		.catch( err => {
-			console.error(err);
+		console.log(props);
+
+		const persScript = document.createElement('script');
+		let filename = '';
+
+		switch(parseInt(props.cookies.chosenPers)){
+			case 1: 
+				filename = 'boy1_anim';
+				break;
+			case 2:
+				filename = 'boy2_anim';
+				break;
+			case 3: 
+				filename = 'girl2_anim';
+				break;
+			case 4:
+				filename = 'girl1_anim';
+				break;
+			default: 
+				return;
+		}
+
+		persScript.src = PromoOptions.cdn + 'js/' + filename + '/' + filename + '.js';
+
+		document.body.appendChild(persScript);
+
+		function init(){
+
+			if (typeof lib !== 'object'){
+				setTimeout( () => {
+					init();
+				}, 100);
+
+				return;
+			}
+
+			animation.init({
+				canvas: canvas, 
+				pers: filename
+			})
+			.then( pers => {
+				that.pers = pers;
+
+				that._firstShow();
+			})
+			.catch( err => {
+				console.error(err);
+			});			
+		}
+
+		persScript.addEventListener('load', function(){
+
+			console.log('loaded');
+
+			init();
+
+
 		});
 		
 	}
@@ -390,7 +440,7 @@ class Main extends React.Component {
 						{
 							text: 'Хочу узнать!',
 							handler: this._okClickHandler,
-							href: 'http://sportik.svyatoyistochnik.com/',
+							href: 'https://ad.dnevnik.ru/promo/sportik-quiz',
 						}
 					],
 				}

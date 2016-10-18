@@ -20,27 +20,27 @@ class PersHidden extends React.Component {
 
 	_show(){
 
-		var tl = new TimelineMax();
+		// var tl = new TimelineMax();
 		
-		tl.fromTo( this._box, 1, {
-			right: '-500px',
-			transform: 'scale(.2)',
-		},{
-			right: '50px',
-			transform: 'scale(1)',
-		});
+		// tl.fromTo( this._box, 1, {
+		// 	right: '-500px',
+		// 	transform: 'scale(.2)',
+		// },{
+		// 	right: '50px',
+		// 	transform: 'scale(1)',
+		// });
 	}
 
 	_hide(){
 		
-		TweenMax.to( this._box, .5, {
-			right: '-500px',
-		});
-		const timestamp = new Date(new Date().getTime() + .5 * 60 * 1000).getTime();
+		// TweenMax.to( this._box, .5, {
+		// 	right: '-500px',
+		// });
+		// const timestamp = new Date(new Date().getTime() + .5 * 60 * 1000).getTime();
 
-		console.log(timestamp);
+		// console.log(timestamp);
 
-		this.props.cookiesSetHiddenUntil(timestamp);
+		// this.props.cookiesSetHiddenUntil(timestamp);
 
 	}
 
@@ -52,18 +52,37 @@ class PersHidden extends React.Component {
 	render(){
 		const { props } = this;
 
+		console.log('fff');
+
 		return(
 
-			<div ref="box" styleName="box">
+			<div styleName="sportik">
 
-				Эээ... че перса спрятал?
+				<a href="https://ad.dnevnik.ru/promo/sportik" styleName="sportik__friends-list">
 
-				<span 
-					styleName="button-close"
-					onClick={this._closeHandler()}
-				>
-					&times;
-				</span>
+
+
+					<div styleName="friend"
+						//onClick={this._showHandler()}
+					>
+
+						<div styleName="friend__title">
+							Выбери себе <br/>
+							друга
+						</div>
+
+					</div>
+				
+					<div styleName="friends-list">
+
+						<div styleName="friends-list__item--1"></div>
+						<div styleName="friends-list__item--2"></div>
+						<div styleName="friends-list__item--3"></div>
+						<div styleName="friends-list__item--4"></div>
+
+					</div>
+					
+				</a>
 
 			</div>
 		);
