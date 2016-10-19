@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CSSModules from 'react-css-modules';
 
 import { PromoOptions } from 'appSettings';
 
 import * as animation from '../../../animation';
 
 import * as cookiesActions from '../../../actions/cookies'
-
-import styles from './main.scss';
 
 import { TweenMax, TimelineMax } from 'gsap';
 
@@ -54,9 +51,6 @@ class Main extends React.Component {
 
 
 		this._animationInit();
-
-		this.timeline = new TimelineMax({});
-
 	}
 
 	_setBoxInitialState(){
@@ -79,6 +73,26 @@ class Main extends React.Component {
 		TweenMax.set(bubble, initialPosotions.bubble);
 		TweenMax.set(bubbleText, initialPosotions.bubble);
 		TweenMax.set(bubbleButtons, initialPosotions.bubble);
+	}
+
+
+	_newTimeline(){
+		console.log('new timeline');
+		const timeline = new TimelineMax({
+		});
+
+		this.timelines.push(timeline);	
+
+		return timeline;
+	}
+
+	_stopTimelines(){
+		this.timelines = this.timelines.filter( timeline => {
+			console.log('timeline paused');
+			////console.log( timeline && timeline.progress(1, false) );
+			//console.log( timeline && timeline.pause() );
+			return false;
+		});
 	}
 
 	_firstShow(){
@@ -105,9 +119,8 @@ class Main extends React.Component {
 
 		this._setBoxInitialState();
 
-		const timeline = new TimelineMax({});
-		this.timelines.push(timeline);
-
+		this._stopTimelines();
+		const timeline = this._newTimeline();
 
 		timeline.to( friend, .5, {
 			...initialPosotions.friend,
@@ -132,8 +145,8 @@ class Main extends React.Component {
 
 		const { box, friend } = this.refs;
 
-		const timeline = new TimelineMax({});
-		this.timelines.push(timeline);
+		this._stopTimelines();
+		const timeline = this._newTimeline();
 		
 		timeline.to( box, .5, {
 			marginTop: '-200px',
@@ -148,7 +161,6 @@ class Main extends React.Component {
 			transform: 'scale(1)',
 			onComplete: () => {
 				this._showCloseButton();
-				this._selectAppearance();
 			},
 		})
 		;
@@ -161,7 +173,7 @@ class Main extends React.Component {
 
 		const that = this;
 
-		console.log(props);
+		//console.log(props);
 
 		const persScript = document.createElement('script');
 		let filename = '';
@@ -207,13 +219,13 @@ class Main extends React.Component {
 				that._firstShow();
 			})
 			.catch( err => {
-				console.error(err);
+				//console.error(err);
 			});			
 		}
 
 		persScript.addEventListener('load', function(){
 
-			console.log('loaded');
+			//console.log('loaded');
 
 			init();
 
@@ -226,7 +238,7 @@ class Main extends React.Component {
 
 		const { props } = this;
 
-		console.log(props.cookies.appearanceCount);
+		//console.log(props.cookies.appearanceCount);
 
 		switch(props.cookies.appearanceCount){
 			case 0: 
@@ -242,7 +254,7 @@ class Main extends React.Component {
 					this._goodBuy();
 					break;
 			default: 
-					console.log('enought for today');
+					//console.log('enought for today');
 		}
 
 		//this.props.appearanceCountUpdate();
@@ -252,12 +264,9 @@ class Main extends React.Component {
 
 		const { bubble, bubbleText, bubbleButtons } = this.refs;
 
-		const timeline = new TimelineMax({
-		});
+		const timeline = this._newTimeline();
 
-		this.timelines.push(timeline);
-
-		timeline.fromTo( bubble, .3, {
+		timeline.fromTo( bubble, .4, {
 			opacity: '0',
 		},{			
 			opacity: '1',
@@ -267,7 +276,7 @@ class Main extends React.Component {
 		},{			
 			opacity: '1',
 		})
-		.fromTo( bubbleButtons, .7, {
+		.fromTo( bubbleButtons, .4, {
 			opacity: '0',
 		},{			
 			opacity: '1',			
@@ -277,13 +286,39 @@ class Main extends React.Component {
 	}
 
 	_clearBubble(){
-		this.setState({
-			...this.state,
-			...{
-				text: false,
-				buttons: [],
+
+		const { bubble, bubbleText, bubbleButtons } = this.refs;
+
+		this._stopTimelines();
+		const timeline = this._newTimeline();
+
+		timeline.fromTo( bubbleButtons, .3, {
+			opacity: '1',
+		},{			
+			opacity: '0',
+		})
+		.fromTo( bubbleText, .3, {
+			opacity: '1',
+		},{			
+			opacity: '0',
+		})
+		.fromTo( bubble, .3, {
+			opacity: '1',
+		},{			
+			opacity: '0',			
+			onComplete: () => {
+
+			this.setState({
+				...this.state,
+				...{
+					text: false,
+					buttons: [],
+				}
+			});
+
 			}
-		});
+		})
+		;
 	}
 
 
@@ -330,7 +365,7 @@ class Main extends React.Component {
 		if (err.message === 'stopped'){
 			return;
 		}
-		console.error(err);
+		//console.error(err);
 	}
 
 	_sayHi(){
@@ -368,6 +403,8 @@ class Main extends React.Component {
 				}
 			});
 
+			this._showText();
+			
 			return this._animationPlay(animationId, 'say_words2');
 		})
 		.then( () => this._animationPlay(animationId, 'say_words2') )
@@ -407,10 +444,12 @@ class Main extends React.Component {
 				}
 			});
 
+			this._showText();
+
 			return this._animationPlay(animationId, 'say_words2');
 		})
 		.then( () => this._animationPlay(animationId, 'say_words2') )
-		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.then( () => this._animationPlay(animationId, 'winked') )
 		.catch( this._animationCatch )
 		;
 
@@ -446,10 +485,12 @@ class Main extends React.Component {
 				}
 			});
 
+			this._showText();
+
 			return this._animationPlay(animationId, 'say_words2');
 		})
 		.then( () => this._animationPlay(animationId, 'say_words2') )
-		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.then( () => this._animationPlay(animationId, 'winked') )
 		.catch( this._animationCatch )
 		;
 
@@ -484,10 +525,12 @@ class Main extends React.Component {
 				}
 			});
 
+			this._showText();
+
 			return this._animationPlay(animationId, 'say_words2');
 		})
 		.then( () => this._animationPlay(animationId, 'say_words2') )
-		.then( () => this._animationPlay(animationId, 'mouth_close') )
+		.then( () => this._animationPlay(animationId, 'winked') )
 		.catch( this._animationCatch )
 		;
 
@@ -562,30 +605,27 @@ class Main extends React.Component {
 		const { props, state } = this;
 
 		return(
-			<div styleName="sportik">
+			<div className="sportik">
 
-				<div ref="box" styleName="sportik__box"
-					//style={{display: state.boxVisible ? 'block' : 'none' }}
+				<div ref="box" className="sportik__box"
 				>
 
-					<div styleName="sportik__text">
+					<div className="sportik__text">
 
-						<div styleName={ !state.text ? 'bubble' : 'bubble--visible' }
+						<div className={ 'bubble ' +  ( state.text ? 'bubble--visible' : '' ) }
 							ref="bubble"
-							//style={{display: state.text ? 'block' : 'none'}}
 						>
 
-							<div styleName="bubble__inner">
+							<div className="bubble__inner">
 								
-								<div styleName="bubble__text" ref="bubbleText">	
+								<div className="bubble__text" ref="bubbleText">	
 								
 									{state.text}		
 								
 								</div>
 
-								<div styleName="bubble__buttons" 
+								<div className="bubble__buttons" 
 									ref="bubbleButtons"				
-									//style={{display:  ? 'block' : 'none'}}
 								>
 
 									{ state.buttons.map( (button, i) => (
@@ -594,7 +634,7 @@ class Main extends React.Component {
 										(
 										<button
 											key={'bubble-button' + i}
-											styleName="button-blue"
+											className="button-blue"
 											onClick={button.handler()}
 										>
 											{button.text}
@@ -606,7 +646,7 @@ class Main extends React.Component {
 											href={button.href}
 											target="_blank"
 											key={'bubble-button' + i}
-											styleName="button-blue"
+											className="button-blue"
 											onClick={button.handler()}
 										>
 											{button.text}
@@ -622,22 +662,22 @@ class Main extends React.Component {
 
 					</div>
 
-					<div styleName="sportik__canvas-placeholder">
+					<div className="sportik__canvas-placeholder">
 
 						<canvas 
 							ref="canvas" 
 							width="200" 
 							height="175" 
-							styleName="sportik__canvas"
+							className="sportik__canvas"
 							//onClick={this._canvasClickHandler()}
 						>
 						</canvas>
 
-						<div styleName={!state.closeVisible ? 'sportik__close-placeholder' : 'sportik__close-placeholder--visible' }
+						<div className={ 'sportik__close-placeholder ' + (state.closeVisible ? 'sportik__close-placeholder--visible' : '') }
 						>
 
 							<button 
-								styleName="button-close"
+								className="button-close"
 								onClick={this._closeHandler()}
 							>
 								&times;
@@ -649,19 +689,19 @@ class Main extends React.Component {
 
 				</div>
 
-				<div ref="friend" styleName="sportik__friend"
+				<div ref="friend" className="sportik__friend"
 					//style={{display: state.friendVisible ? 'block' : 'none' }}
 				>
 
-					<div styleName="friend"
+					<div className="friend"
 						onClick={this._showHandler()}
 					>
 
-						<div styleName="friend__title">
+						<div className="friend__title">
 							Твой друг
 						</div>
 
-						<div styleName="friend__text">
+						<div className="friend__text">
 							Показать
 						</div>
 
@@ -698,4 +738,4 @@ Main.propTypes = {
 //	Symbol: React.PropTypes.symbol.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(Main, styles));
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

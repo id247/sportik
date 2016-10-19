@@ -1,113 +1,291 @@
 @charset "UTF-8";
-/* ==========================================================================
- * Layout
- * ========================================================================== */
 
-.container{
+$blue: #0074b0;
+$maxWidth: 1450px;
+
+.sportik{	
+	// position: absolute;
+	// top: 0;
+	// left: 0;
+	// right: 0;
+	// height: 800px;
+	//background: #ddd;
 	overflow: hidden;
-	position: relative;
+	font-family: Arial;
+	//z-index: -1;
+	//
+	overflow: hidden;
 
-	&__section{
-		
+	&__box{
+		width: 220px;
+		position: absolute;
+		left: 50%;
+		margin: 0 0 0 470px;
+		top: 10px;
+		z-index: 5000000;
+		font-family: Arial;
+
+		@media (max-width: $maxWidth){
+			margin: 0 0 0 -500px;
+			width: 960px;
+			text-align: right;
+		}
 	}
-}
 
-/* ==========================================================================
- * section
- * ========================================================================== */
 
-.section{
-	padding: 80px 0 80px;
+	&__close-placeholder{
+		position: absolute;
+		top: 0;
+		right: 0;
 
-	&__wrap{
-		@include clearfix;
-		max-width: 1000px;
-		padding: 0 10px;
-		margin: auto;
-	}
+		opacity: 0;
+		visibility: hidden;
 
-	&__title{
-		text-align: center;
-		margin: 0 0 40px;
-		font-weight: 700;
-		font-size: 36px;
-		line-height: (50/36);
+		transition: all .4s;
+
+		&--visible{
+			opacity: 1;
+			visibility: visible;
+		}
+
 	}
 
 	&__text{
-		margin: 0 0 30px;		
+	
+		margin: 0 0 13px;
+		min-height: 212px;
+		text-align: center;
+
+		@media (max-width: $maxWidth){
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 20px 0 0;
+			min-height: 0px;
+		}
+	}
+
+	&__canvas-placeholder{
+		position: relative;
+		padding: 0 0 0 25px;
+		
+		@media (max-width: $maxWidth){
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 0 0 0;
+		}
+	}
+
+	&__canvas{
+		display: block;
+		margin: 0 auto 15px;
+	}
+
+	&__friend{
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		margin: 0 0 0 500px;
+
+		@media (max-width: $maxWidth){
+			margin: 0 0 0 -500px;
+			width: 960px;
+			text-align: right;
+		}
+	}
+
+	&__friends-list{
+		position: absolute;
+		text-decoration: none;
+		top: 10px;
+		left: 50%;
+		margin: 0 0 0 500px;	
+
+		@media (max-width: $maxWidth){
+			margin: 0 0 0 -500px;
+			width: 960px;
+			text-align: right;
+		}	
 	}
 }
 
-
-/* ==========================================================================
- * app
- * ========================================================================== */
-
-.app{
-
-	&__loader{
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 500;
-	}
-
-	&__error{
-		position: fixed;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 550;
-	}
-
-}
-
-/* ==========================================================================
- * error-message
- * ========================================================================== */
-
-.error-message{
-	padding: 10px;
-	background: #ff7f7f;
-}
- 
-
-/* ==========================================================================
- * loader
- * ========================================================================== */
-
-.loader{
-	background: rgba(255,255,255,.5);	
+.friend{
+	display: inline-block;
+	@include sprite($friend);
+	padding: 58px 0 0;
 	text-align: center;
+	color: #fff;
+	text-transform: uppercase;
+
+	&__title{
+		margin: 0 0 10px;
+		font-size: 18px;
+	}
+
+	&__text{
+		font-size: 14px;
+	}
+}
+
+.bubble{
+
+	position: relative;
+	z-index: 1;
+	width: 210px;
+	margin: auto;
+	margin: 0 auto;
+	border: 1px solid #0173b2;
+	border-radius: 105px;
+	font-size: 12px;
+	color: #666666;
+
 	opacity: 0;
 	visibility: hidden;
-	
-	transition: all .2s;
 
-	display: flex;
+	//transition: all .5s;
 
-	align-items: center;
-	justify-content: center;
 	
-	&__content{
-		width: 40px;
-		height: 40px;
+	@media (max-width: $maxWidth){
+		width: auto;
+		max-width: 600px;
 		display: inline-block;
-		animation: spin .6s infinite linear;
-		text-indent: -9999px;
-		content: '';
+		vertical-align: top;
+		margin: 7px 0 0 0;
 	}
 
 	&--visible{
-		opacity: 1;
+		// opacity: 1;
 		visibility: visible;
+
+		.bubble__text{
+		// 	opacity: 1;
+		 	visibility: visible;
+		}
+
+		.bubble__buttons{
+		// 	opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&:after{
+		content: '';
+		position: absolute;
+		bottom: -31px;
+		left: 42px;
+		@include sprite($bubble);
+
+		@media (max-width: $maxWidth){
+			display: none;
+		}
+	}
+
+	&__inner{
+	
+
+		padding: 17px 13px 10px;
+		min-height: 210px;
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		justify-content: center;
+	
+		@media (max-width: $maxWidth){
+			min-height: 153px;	
+		}
+	}
+
+	&__text{
+		padding: 0;
+
+		//transition: all .5s .5s;
+		opacity: 0;
+		visibility: hidden;
+
+		h3{
+			margin: 0 0 10px;
+			font-size: 16px;
+			font-weight: 700;
+		}
+		p{
+			margin: 0 0 .5em;
+			&:last-child{
+				margin-bottom: 0;
+			}
+		}
+		
+	}
+
+	&__buttons{
+		padding: 10px 0 0;
+
+		//transition: all .5s 1.0s;
+		opacity: 0;
+		visibility: hidden;
 	}
 }
 
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+
+.friends-list{
+
+	text-align: center;
+
+	&__bubble{
+		@include sprite($get-friend);
+		margin: 0 0 15px;
+	
+		@media (max-width: $maxWidth){
+			display: inline-block;
+			vertical-align: middle;
+			margin: 0;
+		}
+	}
+
+	&__item{
+		margin: 0 auto 10px;
+		@media (max-width: $maxWidth){
+			display: inline-block;
+			vertical-align: middle;
+			margin: 0 10px;
+		}
+	}
+
+	&__item--1{
+		@include sprite($boy2);
+	}
+	&__item--2{
+		@include sprite($boy1);
+	}
+	&__item--3{
+		@include sprite($girl2);
+	}
+	&__item--4{
+		@include sprite($girl1);
+	}
+}
+
+
+.button{
+	border: 0;
+	padding: 0;
+	display: inline-block;
+	text-decoration: none;
+}
+
+.button-blue{
+	@extend .button;
+	background: $blue;
+	outline: none;
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 3px;
+	font-size: 14px;
+}
+
+.button-close{
+	@extend .button;
+	display: block;
+	text-indent: -9999px;
+	background: none;
+	outline: none;
+	@include sprite($close);
 }

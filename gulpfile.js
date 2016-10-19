@@ -272,7 +272,7 @@ gulp.task('server', function () {
 		port: 9000
 	}));
 	
-	//gulp.watch('src/sass/**/*.scss', gulp.series('sass'));
+	gulp.watch('src/sass/**/*.scss', gulp.series('sass'));
 	gulp.watch('src/assets/**/*', gulp.series('assets'));
 	//gulp.watch(['src/base-js/**/*.js'], gulp.series('webpack'));
 	gulp.watch('src/html/**/*.html', gulp.series('html'));

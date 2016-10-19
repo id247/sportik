@@ -16,16 +16,16 @@ class App extends React.Component {
 		
 		this._getCookie();
 
-		console.log(props.cookies);
+		//console.log(props.cookies);
 
 	}
 
 	componentWillUpdate(){
 		const { props, state } = this;
 
-		console.log(props.cookies);
+	//	console.log(props.cookies);
 
-		console.log(new Date().getTime());
+		//console.log(new Date().getTime());
 
 		if (props.cookies && props.cookies.chosenPers && props.cookies.chosenPers !== '22'){
 			props.setPage('pers');
@@ -43,7 +43,7 @@ class App extends React.Component {
 
 		let page;
 
-		console.log(props.page);
+	//	console.log(props.page);
 
 		switch(props.page){
 			case 'pers':

@@ -39,7 +39,7 @@ export function cookiesRead(){
 		const { props } = this;
 		const cookie = Cookie.get(PromoOptions.cookieName);
 
-		console.log(cookie);
+		//console.log(cookie);
 
 		if (!cookie){
 			dispatch(cookiesSet({}));
@@ -58,7 +58,7 @@ export function cookiesRead(){
 				cokieObj.appearanceCount = 0;
 			}
 
-			//cokieObj.appearanceCount = 0;
+			cokieObj.appearanceCount = 0;
 
 			dispatch(cookiesSet(cokieObj));
 
@@ -73,7 +73,7 @@ export function cookiesWrite(){
 	return (dispatch, getState) => {
 		const cookies = getState().cookies;
 
-		console.log(JSON.stringify(cookies));
+		//console.log(JSON.stringify(cookies));
 
 		Cookie.set(PromoOptions.cookieName, JSON.stringify(cookies), { 
 			domain: PromoOptions.cookieDomain, 
@@ -87,7 +87,7 @@ export function cookiesHidePers(){
 
 		const timestamp = new Date(new Date().getTime() + 5 * 60 * 1000).getTime();
 
-		console.log(timestamp);
+		//console.log(timestamp);
 
 		dispatch(cookiesSetHiddenUntil(timestamp));
 		dispatch(cookiesWrite());
