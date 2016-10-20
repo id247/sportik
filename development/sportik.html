@@ -3,19 +3,34 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="assets/css/style.css" id="sportik-styles">
-	
+	 <script type="text/javascript">				
+	         function ar_sendPixel(sz) {				
+	                 var src = 'https://ad.adriver.ru/cgi-bin/rle.cgi?sid=215626&sz='				
+	 + sz + '&bt=21&pz=0&rnd=' + Math.round(Math.random() * 1000000000);				
+	                 if(document.createElement && document.body) {				
+	                 var i = document.createElement('img');				
+	                         i.style.position = 'absolute';				
+	                         i.style.width = i.style.height = '0px';				
+	                         i.src = src;				
+	                         document.body.insertBefore(i, document.body.firstChild);				
+	                 } else {				
+	                         new Image().src = src				
+	                 }				
+	         }				
+	 </script>	
 </head>
 <body class="body">
 
 
+<a id="main_link" href="%reference%" target="%target%"
+	style="display: none;"
+></a>	 
 
-			<div id="app"></div>
+<div id="app"></div>
 
 
 
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-	<!-- <script src="assets/js/girl1_anim/girl1_anim.js"></script> -->
-	<!-- <script src="assets/js/boy1_anim/boy1_anim.js"></script> -->
 
 		
 	

@@ -7,6 +7,10 @@ import { TweenMax, TimelineMax } from 'gsap';
 
 class PersHidden extends React.Component {
 
+	componentWillMount(){
+		this.props.paddingTop.style.height = '200px';
+	}
+	
 	componentDidMount(){
 
 		this._box = this.refs.box;
@@ -52,7 +56,8 @@ class PersHidden extends React.Component {
 
 			<div className="sportik">
 
-				<a href="https://ad.dnevnik.ru/promo/sportik" className="sportik__friends-list friends-list">
+				
+				{/*<a href={props.mainLink} target="_balnk" className="sportik__friends-list friends-list">
 
 					<div className="friends-list__bubble"></div>
 					<div className="friends-list__item friends-list__item--1"></div>
@@ -60,6 +65,9 @@ class PersHidden extends React.Component {
 					<div className="friends-list__item friends-list__item--3"></div>
 					<div className="friends-list__item friends-list__item--4"></div>
 					
+				</a>*/}
+
+				<a href={props.mainLink} target="_balnk" className="sportik__brand sportik-brand">					
 				</a>
 
 			</div>

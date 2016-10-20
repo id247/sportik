@@ -7,8 +7,8 @@ class Root extends React.Component {
 
 	render() {		
 		return (
-			<Provider store={this.props.store}>		
-				<App />
+			<Provider store={this.props.store} >		
+				<App mainLink={this.props.mainLink} paddingTop={this.props.paddingTop} />
 			</Provider>
 		);
 	}

@@ -284,7 +284,7 @@ gulp.task('clean', function() {
 	return del([destFolder]);
 });
 
-gulp.task('build', gulp.series('assets', 'html'));
+gulp.task('build', gulp.series('assets', 'sass', 'html'));
 
 
 //PUBLIC TASKS
@@ -292,13 +292,13 @@ gulp.task('build', gulp.series('assets', 'html'));
 //production
 
 // npm run prod - build whole project to deploy in 'production' folder
-gulp.task('prod-no-js', gulp.series('assets', 'sprite', 'html', 'modifyCssUrls', 'vers'));
+gulp.task('prod-no-js', gulp.series('assets', 'sass', 'html', 'modifyCssUrls', 'vers'));
 
 // npm run prod-html - build only html in 'production' folder
 gulp.task('prod-html', gulp.series('html', 'vers'));
 
 // npm run prod-css - build only css in 'production' folder
-gulp.task('prod-css', gulp.series('sprite', 'modifyCssUrls'));
+gulp.task('prod-css', gulp.series('sass', 'modifyCssUrls'));
 
 //development
 

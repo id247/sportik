@@ -33,6 +33,13 @@ export function cookiesAppearanceCountUpdate() {
 		type: COOKIES_APPEARANCE_COUNT_UPDATE,
 	}
 };
+export const COOKIES_FIRST_TIME_IS_SHOWN = 'COOKIES_FIRST_TIME_IS_SHOWN';
+
+export function cookiesFirstTimeIsShown() {
+	return {
+		type: COOKIES_FIRST_TIME_IS_SHOWN,
+	}
+};
 
 export function cookiesRead(){
 	return dispatch => {
@@ -58,7 +65,9 @@ export function cookiesRead(){
 				cokieObj.appearanceCount = 0;
 			}
 
-			cokieObj.appearanceCount = 0;
+			if (location.href.indexOf('localhost') > -1){
+				cokieObj.appearanceCount = 1;
+			}
 
 			dispatch(cookiesSet(cokieObj));
 
@@ -73,7 +82,7 @@ export function cookiesWrite(){
 	return (dispatch, getState) => {
 		const cookies = getState().cookies;
 
-		//console.log(JSON.stringify(cookies));
+		console.log(JSON.stringify(cookies));
 
 		Cookie.set(PromoOptions.cookieName, JSON.stringify(cookies), { 
 			domain: PromoOptions.cookieDomain, 
@@ -85,7 +94,7 @@ export function cookiesWrite(){
 export function cookiesHidePers(){
 	return (dispatch, getState) => {
 
-		const timestamp = new Date(new Date().getTime() + 5 * 60 * 1000).getTime();
+		const timestamp = new Date(new Date().getTime() + 360 * 60 * 1000).getTime();
 
 		//console.log(timestamp);
 
@@ -109,6 +118,15 @@ export function appearanceCountUpdate(){
 	return (dispatch, getState) => {
 
 		dispatch(cookiesAppearanceCountUpdate());
+		dispatch(cookiesWrite());
+
+	}
+}
+
+export function cookiesFirstTimeIsShownUpdate(){
+	return (dispatch, getState) => {
+
+		dispatch(cookiesFirstTimeIsShown());
 		dispatch(cookiesWrite());
 
 	}

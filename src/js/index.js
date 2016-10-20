@@ -13,20 +13,12 @@ const parentDoc = parentWin.document;
 const paddingTop = document.createElement('div');
 
 const app = document.getElementById('app');
+const mainLink = document.getElementById('main_link').getAttribute('href');
 
 console.log(parentDoc.location);
 
 console.log(25);
 
-
-function setPadding(){
-	if (parentWin.outerWidth <= 1450){
-		paddingTop.style.height = '180px';
-	}else{
-		paddingTop.style.height = '';
-	}
-}
-setPadding();
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -37,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		frameElement.style.left = '0';
 		frameElement.style.right = '0';
 		frameElement.style.width = '100%';
-		frameElement.style.height = '800px';
+		frameElement.style.height = '1300px';
 		frameElement.style.border = 'none';
 
 		parentDoc.body.insertBefore(frameElement, parentDoc.body.firstChild);
@@ -45,16 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	ReactDOM.render(
-		<Root store={store} />,
+		<Root store={store} mainLink={mainLink} paddingTop={paddingTop}/>,
 		app
 	);
 
 });   
 
-
-parentWin && parentWin.addEventListener('resize', () => {
-	setPadding();
-});
 
 
 

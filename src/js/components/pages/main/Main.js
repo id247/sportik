@@ -32,6 +32,10 @@ const initialState = {
 	closeVisible: false,
 }
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 class Main extends React.Component {
 
 	constructor(props){
@@ -41,6 +45,30 @@ class Main extends React.Component {
 
 		this.activeAnimation = false;
 		this.timelines = [];
+	}
+
+	componentWillMount(){
+
+		const { props } = this;
+
+		const parentWin = window.parent ? window.parent : window;
+
+		function setPadding(){
+			console.log(parentWin.document.body.clientWidth);
+			if (parentWin.innerWidth < 1465){
+			//if (viewport().width < 1450){
+				props.paddingTop.style.height = '180px';
+			}else{
+				props.paddingTop.style.height = '';
+			}
+		}
+		setPadding();
+
+		parentWin && parentWin.addEventListener('resize', () => {
+			setPadding();
+		});
+
+
 	}
 
 	componentDidMount(){
@@ -245,10 +273,10 @@ class Main extends React.Component {
 					this._sayHi();
 					break;
 			case 1: 
-					this._homework();
+					this._fact();
 					break;
 			case 2: 
-					this._fact();
+					this._homework();
 					break;
 			case 3: 
 					this._goodBuy();
@@ -370,30 +398,55 @@ class Main extends React.Component {
 
 	_sayHi(){
 
+		const { props } = this;
+
 		const animationId = this._createAnimationId();
+
+		console.log(props.cookies);
 
 		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
 
+			let text = null;
+
+			if (props.cookies.isfirst){
+
+				text = (
+					<div>
+						<h3>
+						Привет!
+						</h3>
+						<p>
+							Я твой новый друг — Спортик!
+						</p>
+						<p>
+							С сегодняшнего дня я буду помогать тебе поддерживать водный баланс.
+						</p>
+						<p>
+							Начнём?
+						</p>
+					</div>
+				);
+
+			}else{
+
+				text = (
+					<div>
+						<h3>
+						Привет!
+						</h3>
+						<p>
+							Это Спортик. Сегодня нас с тобой ждёт много интересного!
+						</p>
+					</div>
+				);
+
+			}
+
 			this.setState({
 				...this.state,
 				...{
-					text: (
-						<div>
-							<h3>
-							Привет!
-							</h3>
-							<p>
-								Я твой новый друг — Спортик!
-							</p>
-							<p>
-								С сегодняшнего дня я буду помогать тебе поддерживать водный баланс.
-							</p>
-							<p>
-								Начнём?
-							</p>
-						</div>
-					),
+					text: text,
 					buttons: [
 						{
 							text: 'Я готов!',
@@ -419,29 +472,135 @@ class Main extends React.Component {
 
 		const animationId = this._createAnimationId();
 
+		const texts = [
+			{
+				text: (
+					<div>
+						<p>
+							Привет! На завтра у тебя есть домашнее задание.
+						</p> 
+						<p>
+							Делай небольшие перерывы между заданиями и не забывай пить воду!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хорошо!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Человек на 70% состоит из воды, а огурец — на 90%. 
+						</p> 
+						<p>
+							Получается, человек — на 50% огурец?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Забавно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Ложась спать, мальчик поставил на стол два стакана воды: целый — если захочет пить, и пустой — если не захочет.
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Забавно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! Делаешь домашнюю работу? Не забудь выпить стакан воды! Это взбодрит тебя и придаст энергии.
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Спасибо!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! На завтра у тебя есть домашнее задание?
+						</p> 
+						<p>
+							Делай небольшие перерывы между заданиями и не забывай пить воду!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Спасибо!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! Повторенье — мать ученья! 
+						</p> 
+						<p>
+							Не забывай делать домашнюю работу. Это помогает тебе лучше запоминать пройденное.
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хорошо!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! У тебя есть домашнее задание на завтра? 
+						</p> 
+						<p>
+							Выпей немного воды и приступай!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хорошо!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+		];
+
 		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
 
 			this.setState({
 				...this.state,
-				...{
-					text: (
-						<div>
-							<p>
-								Привет! На завтра у тебя есть домашнее задание.
-							</p> 
-							<p>
-								Делай небольшие перерывы между заданиями и не забывай пить воду!
-							</p> 
-						</div>
-					),
-					buttons: [
-						{
-							text: 'Хорошо!',
-							handler: this._okClickHandler,
-						}
-					],
-				}
+				...texts[getRandomInt(0, texts.length - 1)],
 			});
 
 			this._showText();
@@ -458,31 +617,216 @@ class Main extends React.Component {
 	_fact(){
 
 		const animationId = this._createAnimationId();
+
+
+		const texts = [
+			{
+				text: (
+					<div>
+						<p>
+							Ты знаешь, что за день мы выдыхаем около 0,5 литра жидкости? 
+						</p> 
+						<p>
+							Сколько же тогда воды должно поступать в организм?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						adriver: 'button_36',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Сколько воды человек выпивает за свою жизнь?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						adriver: 'button_37',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Ты знаешь, что наш организм на 65—70% состоит из воды?
+						</p> 
+						<p>
+							Чтобы чувствовать себя хорошо, нам обязательно нужно поддерживать водный баланс в организма!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Без еды человек может прожить 6 недель, а без воды — всего 5-7 суток!
+						</p> 
+						<p>
+							Хочешь узнать другие интересные факты о воде
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						adriver: 'button_38',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Если ты не пьешь воду больше 3 часов, то становишься менее внимательным.
+						</p> 
+						<p>
+							Не забывай выпивать немного воды на каждой перемене!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Ты знаешь, что огурцы и арбузы почти полностью состоят из воды?
+						</p> 
+						<p>
+							Вот почему ими сложно утолить голод!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Вода покрывает большую часть нашей планеты — 70%!
+						</p> 
+						<p>
+							Но только очень малая    часть —всего 1% — пригодна для питья.
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Под землей есть подземные озера, в которых хранится в 10 раз больше воды, чем на её поверхности!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Очень большой запас воды хранится в ледниках.
+						</p> 
+						<p>
+							Если бы они все растаяли, многие города и страны оказались бы затопленными!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Каждый день человек использует в среднем 80–100 литров воды!
+						</p> 
+						<p>
+							Это немало, так что нам нужно экономнее относиться к воде!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Тучи в небе — это тоже вода!
+						</p> 
+						<p>
+							Толщина одной тучи может достигать 16 км!
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Понятно!',
+						handler: this._okClickHandler,
+					}
+				],
+			},
+		];
 		
 		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
 
 			this.setState({
 				...this.state,
-				...{
-					text: (
-						<div>
-							<p>
-								Ты знаешь, что за день мы выдыхаем около 0,5 литра жидкости? 
-							</p> 
-							<p>
-								Сколько же тогда воды должно поступать в организм?
-							</p> 
-						</div>
-					),
-					buttons: [
-						{
-							text: 'Хочу узнать!',
-							handler: this._okClickHandler,
-							href: 'https://ad.dnevnik.ru/promo/sportik-quiz',
-						}
-					],
-				}
+				//...texts[getRandomInt(0, texts.length - 1)],
+				...texts[0],
 			});
 
 			this._showText();
@@ -536,10 +880,16 @@ class Main extends React.Component {
 
 	}
 
-	_okClick(){
+	_okClick(o){
+
+		const { props } = this;
 
 		this._clearBubble();
 		this.props.appearanceCountUpdate();
+
+		if (props.cookies.isfirst){
+			props.cookiesFirstTimeIsShownUpdate();
+		}
 
 		let animationVariant = 0;
 
@@ -578,6 +928,11 @@ class Main extends React.Component {
 		}
 
 		animationVariants[animationVariant]();
+
+		console.log(o.adriver);
+		if (typeof ar_sendPixel === 'function' && o.adriver){
+			ar_sendPixel( o.adriver );
+		}
 	}
 
 	_canvasClickHandler = () => (e) => {
@@ -597,8 +952,8 @@ class Main extends React.Component {
 		this._hide();
 	}
 
-	_okClickHandler = () => (e) => {
-		this._okClick();
+	_okClickHandler = (o) => (e) => {
+		this._okClick(o);
 	}
 
 	render(){
@@ -647,7 +1002,7 @@ class Main extends React.Component {
 											target="_blank"
 											key={'bubble-button' + i}
 											className="button-blue"
-											onClick={button.handler()}
+											onClick={button.handler({adriver: button.adriver})}
 										>
 											{button.text}
 										</a>
@@ -697,14 +1052,6 @@ class Main extends React.Component {
 						onClick={this._showHandler()}
 					>
 
-						<div className="friend__title">
-							Твой друг
-						</div>
-
-						<div className="friend__text">
-							Показать
-						</div>
-
 					</div>
 
 				</div>
@@ -722,6 +1069,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	//logout: () => dispatch(asyncActions.logout()), 
+	cookiesFirstTimeIsShownUpdate: () => dispatch(cookiesActions.cookiesFirstTimeIsShownUpdate()), 
 	cookiesHidePers: () => dispatch(cookiesActions.cookiesHidePers()), 
 	cookiesShowPers: () => dispatch(cookiesActions.cookiesShowPers()), 
 	appearanceCountUpdate: () => dispatch(cookiesActions.appearanceCountUpdate()), 

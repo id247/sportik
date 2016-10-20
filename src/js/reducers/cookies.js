@@ -54,10 +54,26 @@ export function appearanceDate(state = false, action) {
 	}
 }
 
+export function isfirst(state = true, action) {
+	switch (action.type) {
+		case actions.COOKIES_SET:
+			return 	action.payload.isfirst;
+		case actions.COOKIES_FIRST_TIME_IS_SHOWN:
+			return 	false;
+
+		case actions.COOKIES_UNSET:
+			return 	false;
+
+		default:
+			return state;
+	}
+}
+
 
 export const cookies = combineReducers({
 	chosenPers,
 	hiddenUntil,
 	appearanceCount,
 	appearanceDate,
+	isfirst,
 });
