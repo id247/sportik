@@ -57,7 +57,7 @@ export function appearanceDate(state = false, action) {
 export function isfirst(state = true, action) {
 	switch (action.type) {
 		case actions.COOKIES_SET:
-			return 	action.payload.isfirst;
+			return 	action.payload.isfirst !== undefined ? action.payload.isfirst : state;
 		case actions.COOKIES_FIRST_TIME_IS_SHOWN:
 			return 	false;
 
