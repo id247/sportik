@@ -4,6 +4,13 @@ $blue: #0074b0;
 $maxWidth: 1450px;
 
 .sportik{	
+
+	box-sizing: border-box;
+
+	*, *:before, *:after{
+		box-sizing: border-box;
+	}
+
 	// position: absolute;
 	// top: 0;
 	// left: 0;
@@ -109,7 +116,7 @@ $maxWidth: 1450px;
 	}
 }
 
-.friend{
+.sportik-friend{
 	display: inline-block;
 	@include sprite($friend);
 	padding: 58px 0 0;
@@ -127,7 +134,7 @@ $maxWidth: 1450px;
 	}
 }
 
-.bubble{
+.sportik-bubble{
 
 	position: relative;
 	z-index: 1;
@@ -196,12 +203,14 @@ $maxWidth: 1450px;
 		justify-content: center;
 	
 		@media (max-width: $maxWidth){
+			width: auto;
 			min-height: 153px;	
 		}
 	}
 
 	&__text{
 		padding: 0;
+		max-width: 100%;
 
 		//transition: all .5s .5s;
 		opacity: 0;
@@ -222,6 +231,7 @@ $maxWidth: 1450px;
 	}
 
 	&__buttons{
+		max-width: 100%;
 		padding: 10px 0 0;
 
 		//transition: all .5s 1.0s;
@@ -231,7 +241,7 @@ $maxWidth: 1450px;
 }
 
 
-.friends-list{
+.sportik-friends-list{
 
 	text-align: center;
 
@@ -276,25 +286,28 @@ $maxWidth: 1450px;
 }
 
 
-.button{
+.sportik-button{
 	border: 0;
 	padding: 0;
 	display: inline-block;
 	text-decoration: none;
 }
 
-.button-blue{
-	@extend .button;
+.sportik-button-blue{
+	@extend .sportik-button;
 	background: $blue;
 	outline: none;
 	color: #fff;
 	padding: 5px 10px;
 	border-radius: 3px;
 	font-size: 14px;
+	&:hover{
+		color: #fff;
+	}
 }
 
-.button-close{
-	@extend .button;
+.sportik-button-close{
+	@extend .sportik-button;
 	display: block;
 	text-indent: -9999px;
 	background: none;

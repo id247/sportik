@@ -13,24 +13,35 @@ const parentDoc = parentWin.document;
 const paddingTop = document.createElement('div');
 
 const app = document.getElementById('app');
+const styles = document.getElementById('sportik-styles');
 const mainLink = document.getElementById('main_link').getAttribute('href');
 
 console.log(parentDoc.location);
 
 document.addEventListener('DOMContentLoaded', () => {
 
+	console.log('DOMContentLoaded');
+
 	if (frameElement){
 
-		frameElement.style.position = 'absolute';
-		frameElement.style.top = '0';
-		frameElement.style.left = '0';
-		frameElement.style.right = '0';
-		frameElement.style.width = '100%';
-		frameElement.style.height = '1300px';
-		frameElement.style.border = 'none';
+		app.style.position = 'absolute';
+		app.style.top = '0';
+		app.style.left = '0';
+		app.style.right = '0';
+		app.style.width = '100%';
+		app.style.height = '1300px';
+		app.style.border = 'none';
 
-		parentDoc.body.insertBefore(frameElement, parentDoc.body.firstChild);
-		parentDoc.body.insertBefore(paddingTop, frameElement);
+		frameElement.style.position = 'absolute';
+		frameElement.style.left = '-9999px';
+
+
+		//parentDoc.body.insertBefore(frameElement, parentDoc.body.firstChild);
+		//parentDoc.body.insertBefore(paddingTop, frameElement);
+		parentDoc.head.appendChild(styles);
+		parentDoc.body.insertBefore(paddingTop, parentDoc.body.firstChild);
+		parentDoc.body.insertBefore(app, parentDoc.body.firstChild);
+		//parentDoc.body.insertBefore(frameElement.parent, parentDoc.body.firstChild);
 
 	}
 

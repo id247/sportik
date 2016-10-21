@@ -224,7 +224,7 @@ class Main extends React.Component {
 				filename = 'girl1_anim';
 				break;
 			default: 
-				return;
+				//return;
 		}
 
 		persScript.src = PromoOptions.cdn + 'js/' + filename + '/' + filename + '.js';
@@ -1131,7 +1131,7 @@ class Main extends React.Component {
 
 					<div className="sportik__text">
 
-						<div className={ 'bubble ' +  ( state.text ? 'bubble--visible' : '' ) }
+						<div className={ 'sportik-bubble ' +  ( state.text ? 'sportik-bubble--visible' : '' ) }
 							ref="bubble"
 						>
 
@@ -1153,7 +1153,7 @@ class Main extends React.Component {
 										(
 										<button
 											key={'bubble-button' + i}
-											className="button-blue"
+											className="sportik-button-blue"
 											onClick={button.handler()}
 										>
 											{button.text}
@@ -1165,7 +1165,7 @@ class Main extends React.Component {
 											href={button.href}
 											target="_blank"
 											key={'bubble-button' + i}
-											className="button-blue"
+											className="sportik-button-blue"
 											onClick={button.handler({adriver: button.adriver})}
 										>
 											{button.text}
@@ -1196,7 +1196,7 @@ class Main extends React.Component {
 						>
 
 							<button 
-								className="button-close"
+								className="sportik-button-close"
 								onClick={this._closeHandler()}
 							>
 								&times;
@@ -1212,7 +1212,7 @@ class Main extends React.Component {
 					//style={{display: state.friendVisible ? 'block' : 'none' }}
 				>
 
-					<div className="friend"
+					<div className="sportik-friend"
 						onClick={this._showHandler()}
 					>
 

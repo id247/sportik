@@ -31,6 +31,7 @@ class App extends React.Component {
 			props.setPage('pers');
 		}else{
 			props.setPage('pers-hidden');
+			//props.setPage('pers');
 		}	
 	}
 
