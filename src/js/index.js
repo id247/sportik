@@ -17,12 +17,9 @@ const mainLink = document.getElementById('main_link').getAttribute('href');
 
 console.log(parentDoc.location);
 
-console.log(25);
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
-	if (frameElement && app){
+	if (frameElement){
 
 		frameElement.style.position = 'absolute';
 		frameElement.style.top = '0';
@@ -34,18 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		parentDoc.body.insertBefore(frameElement, parentDoc.body.firstChild);
 		parentDoc.body.insertBefore(paddingTop, frameElement);
+
 	}
 
-	ReactDOM.render(
-		<Root store={store} mainLink={mainLink} paddingTop={paddingTop}/>,
-		app
-	);
+	if (app){
 
-});   
+		ReactDOM.render(
+			<Root store={store} mainLink={mainLink} paddingTop={paddingTop}/>,
+			app
+		);
 
+	}
 
-
-
-
-
-
+});

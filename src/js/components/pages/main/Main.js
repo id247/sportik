@@ -7,7 +7,7 @@ import * as animation from '../../../animation';
 
 import * as cookiesActions from '../../../actions/cookies'
 
-import { TweenMax, TimelineMax } from 'gsap';
+//import { TweenMax, TimelineMax } from 'gsap';
 
 const initialPosotions = {
 	box: {			
@@ -24,14 +24,6 @@ const initialPosotions = {
 	}
 }
 
-const initialState = {
-	text: false,
-	buttons: [],
-	boxVisible: true,
-	friendVisible: false,
-	closeVisible: false,
-}
-
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -41,7 +33,13 @@ class Main extends React.Component {
 	constructor(props){
 		super(props);
 
-		this.state = initialState;
+		this.state = {
+			text: false,
+			buttons: [],
+			boxVisible: true,
+			friendVisible: false,
+			closeVisible: false,
+		};
 
 		this.activeAnimation = false;
 		this.timelines = [];
@@ -142,7 +140,13 @@ class Main extends React.Component {
 
 		this.setState({
 			...this.state,
-			...initialState
+			...{
+				text: false,
+				buttons: [],
+				boxVisible: true,
+				friendVisible: false,
+				closeVisible: false,
+			}
 		});
 
 		this._setBoxInitialState();
@@ -204,7 +208,7 @@ class Main extends React.Component {
 		//console.log(props);
 
 		const persScript = document.createElement('script');
-		let filename = '';
+		let filename = 'boy2_anim';
 
 		switch(parseInt(props.cookies.chosenPers)){
 			case 1: 
@@ -635,7 +639,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=1706167902',
 						adriver: 'button_36',
 					}
 				],
@@ -652,7 +656,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=133899152',
 						adriver: 'button_37',
 					}
 				],
@@ -690,8 +694,168 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.dnevnik.ru/promo/sportik-article-2',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=2141182570',
 						adriver: 'button_38',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Мы с друзьями провели опыт с газировкой — сварили её! 
+						</p> 
+						<p>
+							Хочешь узнать, что получилось?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=1958480520',
+						adriver: 'button_39',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! Знаешь, как растения реагируют на воду и на газировку? 
+						</p> 
+						<p>
+							Посмотрим? 
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=1877907530',
+						adriver: 'button_40',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Какой цвет тебе больше нравится? Ты можешь выбрать бутылочку «Спортик» своего любимого цвета! 
+						</p> 
+						<p>
+							Попробуешь?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=372513478',
+						adriver: 'button_41',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Больше всего я люблю «Спортик» за удобную спортивную крышечку! А ещё она бывает разных цветов! 
+						</p> 
+						<p>
+							Посмотрим?
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=282708276',
+						adriver: 'button_42',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Сколько воды тебе нужно пить каждый день? Ответь на мои вопросы, и я помогу тебе рассчитать! 
+						</p> 
+						<p>
+							Начнём? 
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=1030945416',
+						adriver: 'button_43',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Расскажи немного о себе! А я помогу тебе рассчитать, сколько воды тебе нужно пить каждый день. 
+						</p> 
+						<p>
+							Начнём? 
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=604558988',
+						adriver: 'button_44',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Привет! Сегодня я хочу рассказать тебе, для чего нам нужно пить воду. 
+						</p> 
+						<p>
+							Начнём? 
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=1496057746',
+						adriver: 'button_45',
+					}
+				],
+			},
+			{
+				text: (
+					<div>
+						<p>
+							Вода помогает нашему организму во всём! 
+						</p> 
+						<p>
+							Хочешь узнать больше про это? 
+						</p> 
+					</div>
+				),
+				buttons: [
+					{
+						text: 'Хочу узнать!',
+						handler: this._okClickHandler,
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=692439808',
+						adriver: 'button_46',
 					}
 				],
 			},
@@ -880,7 +1044,7 @@ class Main extends React.Component {
 
 	}
 
-	_okClick(o){
+	_okClick(o = {}){
 
 		const { props } = this;
 

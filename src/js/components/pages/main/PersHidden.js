@@ -3,50 +3,24 @@ import { connect } from 'react-redux';
 import { PromoOptions } from 'appSettings';
 import * as cookiesActions from '../../../actions/cookies'
 
-import { TweenMax, TimelineMax } from 'gsap';
+//import { TweenMax, TimelineMax } from 'gsap';
 
 class PersHidden extends React.Component {
 
 	componentWillMount(){
 		this.props.paddingTop.style.height = '200px';
+
+		//this.isBouns = document.getElementById('app').getAttribute('data-bonus');
 	}
 	
 	componentDidMount(){
 
-		this._box = this.refs.box;
+		// if (this.isBonus){
+		// 	if (typeof ar_sendPixel === 'function' && o.adriver){
+		// 		ar_sendPixel( o.adriver );
+		// 	}
+		// }
 
-		this._show();
-	}
-
-	_show(){
-
-		// var tl = new TimelineMax();
-		
-		// tl.fromTo( this._box, 1, {
-		// 	right: '-500px',
-		// 	transform: 'scale(.2)',
-		// },{
-		// 	right: '50px',
-		// 	transform: 'scale(1)',
-		// });
-	}
-
-	_hide(){
-		
-		// TweenMax.to( this._box, .5, {
-		// 	right: '-500px',
-		// });
-		// const timestamp = new Date(new Date().getTime() + .5 * 60 * 1000).getTime();
-
-		// console.log(timestamp);
-
-		// this.props.cookiesSetHiddenUntil(timestamp);
-
-	}
-
-	_closeHandler = () => (e) => {
-		e.preventDefault();
-		this._hide();
 	}
 
 	render(){

@@ -66,7 +66,7 @@ export function cookiesRead(){
 			}
 
 			if (location.href.indexOf('localhost') > -1){
-				cokieObj.appearanceCount = 1;
+				cokieObj.appearanceCount = 2;
 			}
 
 			dispatch(cookiesSet(cokieObj));
