@@ -25,7 +25,7 @@ $maxWidth: 1450px;
 
 	&__box{
 		width: 220px;
-		position: absolute;
+		position: fixed;
 		left: 50%;
 		margin: 0 0 0 490px;
 		top: 10px;
@@ -33,6 +33,7 @@ $maxWidth: 1450px;
 		font-family: Arial;
 
 		@media (max-width: $maxWidth){
+			position: relative;
 			margin: 0 0 0 -500px;
 			width: 960px;
 			text-align: right;
@@ -89,12 +90,13 @@ $maxWidth: 1450px;
 	}
 
 	&__friend{
-		position: absolute;
+		position: fixed;
 		top: 10px;
 		left: 50%;
 		margin: 0 0 0 500px;
 
 		@media (max-width: $maxWidth){
+			position: absolute;
 			margin: 0 0 0 -500px;
 			width: 960px;
 			text-align: right;
@@ -146,6 +148,7 @@ $maxWidth: 1450px;
 	border-radius: 105px;
 	font-size: 12px;
 	color: #666666;
+	padding: 0 15px;
 
 	opacity: 0;
 	visibility: hidden;
@@ -155,22 +158,23 @@ $maxWidth: 1450px;
 	
 	@media (max-width: $maxWidth){
 		width: auto;
-		max-width: 600px;
+		max-width: 700px;
 		display: inline-block;
 		vertical-align: top;
-		margin: 7px 0 0 0;
+		margin: 0px 0 0 0;
+		padding: 0 40px;
 	}
 
 	&--visible{
 		// opacity: 1;
 		visibility: visible;
 
-		.bubble__text{
+		.sportik-bubble__text{
 		// 	opacity: 1;
 		 	visibility: visible;
 		}
 
-		.bubble__buttons{
+		.sportik-bubble__buttons{
 		// 	opacity: 1;
 			visibility: visible;
 		}
@@ -204,7 +208,7 @@ $maxWidth: 1450px;
 	
 		@media (max-width: $maxWidth){
 			width: auto;
-			min-height: 153px;	
+			min-height: 160px;	
 		}
 	}
 

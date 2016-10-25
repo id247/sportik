@@ -476,128 +476,390 @@ class Main extends React.Component {
 
 		const animationId = this._createAnimationId();
 
-		const texts = [
-			{
-				text: (
-					<div>
-						<p>
-							Привет! На завтра у тебя есть домашнее задание.
-						</p> 
-						<p>
-							Делай небольшие перерывы между заданиями и не забывай пить воду!
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Хорошо!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Человек на 70% состоит из воды, а огурец — на 90%. 
-						</p> 
-						<p>
-							Получается, человек — на 50% огурец?
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Забавно!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Ложась спать, мальчик поставил на стол два стакана воды: целый — если захочет пить, и пустой — если не захочет.
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Забавно!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Привет! Делаешь домашнюю работу? Не забудь выпить стакан воды! Это взбодрит тебя и придаст энергии.
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Спасибо!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Привет! На завтра у тебя есть домашнее задание?
-						</p> 
-						<p>
-							Делай небольшие перерывы между заданиями и не забывай пить воду!
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Спасибо!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Привет! Повторенье — мать ученья! 
-						</p> 
-						<p>
-							Не забывай делать домашнюю работу. Это помогает тебе лучше запоминать пройденное.
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Хорошо!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-			{
-				text: (
-					<div>
-						<p>
-							Привет! У тебя есть домашнее задание на завтра? 
-						</p> 
-						<p>
-							Выпей немного воды и приступай!
-						</p> 
-					</div>
-				),
-				buttons: [
-					{
-						text: 'Хорошо!',
-						handler: this._okClickHandler,
-					}
-				],
-			},
-		];
+		let texts = [];
+
+		const parentWin = window.parent ? window.parent : window;
+
+		if (parentWin.location.href.indexOf('schedules') > -1){
+
+			texts = [
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Завтра у тебя физкультура?
+							</p> 
+							<p>
+								Не забудь форму и обязательно захвати в школу бутылочку воды «Спортик»!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Завтра у тебя физкультура. Когда ты активно двигаешься, то теряешь много жидкости и хуже себя чувствуешь. 
+							</p> 
+							<p>
+								Поэтому не забудь попить перед уроком и после него.
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! У тебя завтра много уроков. 
+							</p> 
+							<p>
+								Чтобы быть бодрым весь день, обязательно захвати в школу бутылочку воды!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! У тебя завтра много уроков. 
+							</p> 
+							<p>
+								Чтобы быть бодрым весь день, обязательно захвати в школу бутылочку воды!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Сегодня у тебя был насыщенный день. 
+							</p> 
+							<p>
+								Чтобы взбодриться перед домашней работой, не забудь попить воды!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Если у тебя иногда бывают не очень хорошие оценки, не расстраивайся! 
+							</p> 
+							<p>
+								Ты их обязательно исправишь!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Спасибо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Завтра у тебя важные уроки. 
+							</p> 
+							<p>
+								Не забудь заранее собрать в рюкзак все учебники и тетради! 
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+			];
+
+		}else{
+
+			texts = [
+				{
+					text: (
+						<div>
+							<p>
+								Привет! На завтра у тебя есть домашнее задание.
+							</p> 
+							<p>
+								Делай небольшие перерывы между заданиями и не забывай пить воду!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Человек на 70% состоит из воды, а огурец — на 90%. 
+							</p> 
+							<p>
+								Получается, человек — на 50% огурец?
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Забавно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Ложась спать, мальчик поставил на стол два стакана воды: целый — если захочет пить, и пустой — если не захочет.
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Забавно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Делаешь домашнюю работу?
+							</p> 
+							<p>
+								Не забудь выпить стакан воды! Это взбодрит тебя и придаст энергии.
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Спасибо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! На завтра у тебя есть домашнее задание?
+							</p> 
+							<p>
+								Делай небольшие перерывы между заданиями и не забывай пить воду!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Спасибо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Повторенье — мать ученья! 
+							</p> 
+							<p>
+								Не забывай делать домашнюю работу. Это помогает тебе лучше запоминать пройденное.
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! У тебя есть домашнее задание на завтра? 
+							</p> 
+							<p>
+								Выпей немного воды и приступай!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! У тебя есть домашнее задание на завтра? 
+							</p> 
+							<p>
+								Выпей немного воды и приступай!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Хорошо!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Привет! Если тебе трудно вставать в школу, попробуй начинать утро со стакана воды! 
+							</p> 
+							<p>
+								Это поможет взбодриться!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Попробую!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Интересно устроен детский желудок! 
+							</p> 
+							<p>
+								В него не влезают последние ложки супа, но прекрасно помещаются 3 печеньки и 5 конфет!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Точно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Один приятель спрашивает у другого: 
+							</p> 
+							<p>
+								— Ты поменял рыбкам воду в аквариуме?
+							</p> 
+							<p>
+								— Нет, зачем, они еще эту не выпили!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Забавно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								— Сколько человек может прожить без воды?
+							</p> 
+							<p>
+								— Ну, я думаю, человек 10—15 максимум!
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Забавно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+				{
+					text: (
+						<div>
+							<p>
+								Какой твой любимый праздник?
+							</p> 
+							<p>
+								— «Новый Год»
+							</p> 
+							<p>
+								— «8 Марта»
+							</p> 
+							<p>
+								— «Масленица»
+							</p> 
+							<p>
+								— «Ура, горячую воду дали!»
+							</p> 
+						</div>
+					),
+					buttons: [
+						{
+							text: 'Забавно!',
+							handler: this._okClickHandler,
+						}
+					],
+				},
+			];
+
+		}
 
 		this._animationPlay(animationId, 'say_hello')
 		.then( () => {
@@ -605,6 +867,7 @@ class Main extends React.Component {
 			this.setState({
 				...this.state,
 				...texts[getRandomInt(0, texts.length - 1)],
+				//...texts[texts.length - 5],
 			});
 
 			this._showText();
@@ -989,8 +1252,8 @@ class Main extends React.Component {
 
 			this.setState({
 				...this.state,
-				//...texts[getRandomInt(0, texts.length - 1)],
-				...texts[0],
+				...texts[getRandomInt(0, texts.length - 1)],
+				//...texts[0],
 			});
 
 			this._showText();
@@ -1071,8 +1334,7 @@ class Main extends React.Component {
 				;
 			},
 			() => {
-				this._animationPlay(animationId, 'hand_down')
-				.then( () => this._animationPlay(animationId, 'drink') )
+				this._animationPlay(animationId, 'drink')
 				.then( () => this._animationPlay(animationId, 'hand_up') )
 				.then( () => this._animationPlay(animationId, 'normal') )
 				.catch( this._animationCatch )
@@ -1135,15 +1397,15 @@ class Main extends React.Component {
 							ref="bubble"
 						>
 
-							<div className="bubble__inner">
+							<div className="sportik-bubble__inner">
 								
-								<div className="bubble__text" ref="bubbleText">	
+								<div className="sportik-bubble__text" ref="bubbleText">	
 								
 									{state.text}		
 								
 								</div>
 
-								<div className="bubble__buttons" 
+								<div className="sportik-bubble__buttons" 
 									ref="bubbleButtons"				
 								>
 
