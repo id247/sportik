@@ -902,7 +902,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=1706167902',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_36',
 					}
 				],
@@ -919,7 +919,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=133899152',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_37',
 					}
 				],
@@ -957,7 +957,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=2141182570',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_38',
 					}
 				],
@@ -977,7 +977,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=1958480520',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_39',
 					}
 				],
@@ -997,7 +997,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=1877907530',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_40',
 					}
 				],
@@ -1017,7 +1017,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=372513478',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_41',
 					}
 				],
@@ -1037,7 +1037,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=282708276',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_42',
 					}
 				],
@@ -1057,7 +1057,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=1030945416',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_43',
 					}
 				],
@@ -1077,7 +1077,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=604558988',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_44',
 					}
 				],
@@ -1097,7 +1097,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=1496057746',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_45',
 					}
 				],
@@ -1117,7 +1117,7 @@ class Main extends React.Component {
 					{
 						text: 'Хочу узнать!',
 						handler: this._okClickHandler,
-						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=692439808',
+						href: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=' + Math.round(Math.random() * 1000000),
 						adriver: 'button_46',
 					}
 				],
@@ -1445,14 +1445,16 @@ class Main extends React.Component {
 
 					<div className="sportik__canvas-placeholder">
 
-						<canvas 
-							ref="canvas" 
-							width="200" 
-							height="175" 
-							className="sportik__canvas"
-							//onClick={this._canvasClickHandler()}
-						>
-						</canvas>
+						<a href={'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2456214&bid=4732813&bn=4732813&rnd=' + Math.round(Math.random() * 1000000)} className="sportik__href">
+							<canvas 
+								ref="canvas" 
+								width="200" 
+								height="175" 
+								className="sportik__canvas"
+								//onClick={this._canvasClickHandler()}
+							>
+							</canvas>
+						</a>
 
 						<div className={ 'sportik__close-placeholder ' + (state.closeVisible ? 'sportik__close-placeholder--visible' : '') }
 						>
