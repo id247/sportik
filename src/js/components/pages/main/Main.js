@@ -1318,7 +1318,6 @@ class Main extends React.Component {
 			props.cookiesFirstTimeIsShownUpdate();
 		}
 
-		let animationVariant = 0;
 
 		const animationId = this._createAnimationId();
 
@@ -1343,20 +1342,36 @@ class Main extends React.Component {
 			() => {
 				this._animationPlay(animationId, 'show_bottle', 1000)
 				.then( () => this._animationPlay(animationId, 'hide_bottle') )
+				.then( () => this._animationPlay(animationId, 'hand_up') )
 				.then( () => this._animationPlay(animationId, 'normal') )
+				.catch( this._animationCatch )
+				;
+			},
+			() => {
+				this._animationPlay(animationId, 'winked')
+				.catch( this._animationCatch )
+				;
+			},
+			() => {
+				this._animationPlay(animationId, 'eyes_blink')
 				.catch( this._animationCatch )
 				;
 			},
 		];
 
-		if (this.props.cookies.appearanceCount > 0){
-			animationVariant = 1;
+		let animationVariant = getRandomInt(1, animationVariants.length - 1);
+
+		console.log(animationVariant);
+
+		if (this.props.cookies.appearanceCount === 0){
+			animationVariant = 0;
 		}
 
 		animationVariants[animationVariant]();
 
-		console.log(o.adriver);
+
 		if (typeof ar_sendPixel === 'function' && o.adriver){
+			console.log(o.adriver);
 			ar_sendPixel( o.adriver );
 		}
 	}
@@ -1384,6 +1399,26 @@ class Main extends React.Component {
 
 	render(){
 		const { props, state } = this;
+
+		const links = [
+			'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2456214&bid=4732813&bn=4732813&rnd=',
+
+
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=',
+			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=',
+		];
+
+		const link = links[getRandomInt(0, links.length - 1)];
+
 
 		return(
 			<div className="sportik">
@@ -1445,7 +1480,7 @@ class Main extends React.Component {
 
 					<div className="sportik__canvas-placeholder">
 
-						<a href={'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2456214&bid=4732813&bn=4732813&rnd=' + Math.round(Math.random() * 1000000)} className="sportik__href">
+						<a href={link + Math.round(Math.random() * 1000000)} className="sportik__href">
 							<canvas 
 								ref="canvas" 
 								width="200" 
