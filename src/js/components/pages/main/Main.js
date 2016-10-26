@@ -1401,20 +1401,56 @@ class Main extends React.Component {
 		const { props, state } = this;
 
 		const links = [
-			'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2456214&bid=4732813&bn=4732813&rnd=',
+			{
+				link: 'http://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2456214&bid=4732813&bn=4732813&rnd=',
+				adriver: false,
+			},
 
 
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=',
-			'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=',
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458104&bid=4738346&bn=4738346&rnd=',
+				adriver: 'button_36',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458105&bid=4738347&bn=4738347&rnd=',
+				adriver: 'button_37',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458106&bid=4738348&bn=4738348&rnd=',
+				adriver: 'button_38',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458107&bid=4738349&bn=4738349&rnd=',
+				adriver: 'button_39',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458108&bid=4738350&bn=4738350&rnd=',
+				adriver: 'button_40',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458109&bid=4738351&bn=4738351&rnd=',
+				adriver: 'button_41',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458110&bid=4738353&bn=4738353&rnd=',
+				adriver: 'button_42',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458111&bid=4738356&bn=4738356&rnd=',
+				adriver: 'button_43',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458112&bid=4738365&bn=4738365&rnd=',
+				adriver: 'button_44',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458113&bid=4738372&bn=4738372&rnd=',
+				adriver: 'button_45',
+			},
+			{
+				link: 'https://ad.adriver.ru/cgi-bin/click.cgi?sid=1&bt=2&ad=605005&pid=2458114&bid=4738373&bn=4738373&rnd=',
+				adriver: 'button_46',
+			},
 		];
 
 		const link = links[getRandomInt(0, links.length - 1)];
@@ -1480,7 +1516,16 @@ class Main extends React.Component {
 
 					<div className="sportik__canvas-placeholder">
 
-						<a href={link + Math.round(Math.random() * 1000000)} className="sportik__href">
+						<a 	href={link.link + Math.round(Math.random() * 1000000)} 
+							target={link.adriver ? '_blank' : '_self'}
+							className="sportik__href"
+							onClick={(e) => {
+								if (typeof ar_sendPixel === 'function' && link.adriver){
+									console.log(link.adriver);
+									ar_sendPixel( link.adriver );
+								}
+							}}
+							>
 							<canvas 
 								ref="canvas" 
 								width="200" 
