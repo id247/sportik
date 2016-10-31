@@ -60,7 +60,9 @@ export function cookiesRead(){
 			//if last appearanse was yesterday - reset appearance counter to show pers again
 			const today = new Date().getMonth() * 100 + new Date().getDate();
 
-			if (today > cookie.appearanceDate){
+			console.log(cokieObj, today, cokieObj.appearanceDate);
+
+			if (today > cokieObj.appearanceDate){
 				console.log('yesterday');
 				cokieObj.appearanceCount = 0;
 			}
