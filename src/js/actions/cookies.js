@@ -88,6 +88,7 @@ export function cookiesWrite(){
 
 		Cookie.set(PromoOptions.cookieName, JSON.stringify(cookies), { 
 			domain: PromoOptions.cookieDomain, 
+			expires: 365,
 			path: '/'
 		});
 	}
